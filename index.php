@@ -9,7 +9,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
-<body>
+<body class="page-transition">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <i class="fas fa-running running-icon"></i>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
     <nav class="main-navbar">
         <div class="container navbar-container">
             <div class="logo">
@@ -24,58 +34,30 @@
                 <li><a href="tables.php"><i class="fas fa-table"></i> Tabelas</a></li>
                 <li><a href="about.php"><i class="fas fa-info-circle"></i> Sobre Pace</a></li>
                 <li><a href="tips.php"><i class="fas fa-lightbulb"></i> Dicas</a></li>
-                <li class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <span class="slider"></span>
-                        <i class="fas fa-sun theme-icon sun-icon"></i>
-                        <i class="fas fa-moon theme-icon moon-icon"></i>
-                    </label>
-                </li>
             </ul>
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch" class="theme-switch-input">
+                <label for="theme-switch" class="theme-switch-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
         </div>
     </nav>
 
     <header class="hero">
         <div class="container hero-content">
-            <h1 class="fade-in"><span class="highlight">Lazz</span>Pace</h1>
-            <p class="fade-in-delay">Calcule e entenda o seu ritmo de corrida</p>
-            <a href="calculator.php" class="btn btn-primary btn-pulse">Começar agora</a>
+            <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
+            <a href="calculator.php" class="btn btn-primary btn-pulse">Calculadora completa</a>
         </div>
     </header>
 
     <main class="container">
-        <section class="features">
-            <h2 class="section-title">O que o LazzPace oferece</h2>
-            
-            <div class="cards-container">
-                <div class="feature-card">
-                    <div class="card-icon"><i class="fas fa-calculator"></i></div>
-                    <h3>Calculadora Precisa</h3>
-                    <p>Calcule seu pace, tempo ou distância com nossa ferramenta intuitiva.</p>
-                    <a href="calculator.php" class="card-link">Usar calculadora <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="card-icon"><i class="fas fa-table"></i></div>
-                    <h3>Tabelas de Referência</h3>
-                    <p>Consulte tempos estimados para diversas distâncias baseados no seu pace.</p>
-                    <a href="tables.php" class="card-link">Ver tabelas <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="card-icon"><i class="fas fa-running"></i></div>
-                    <h3>Dicas Profissionais</h3>
-                    <p>Aprenda a melhorar seu desempenho com dicas de especialistas.</p>
-                    <a href="tips.php" class="card-link">Ver dicas <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-        
-        <section class="quick-calc">
+        <section class="quick-calc animate-on-scroll">
             <div class="card">
                 <h2>Cálculo Rápido</h2>
-                <p>Precisa de um cálculo rápido? Use nossa mini calculadora:</p>
+                <p>Faça um cálculo rápido de pace com nossa mini calculadora:</p>
                 <form id="quick-pace-calculator" class="animated-form">
                     <div class="form-group">
                         <label for="quick-distance">Distância (km)</label>
@@ -104,38 +86,29 @@
             </div>
         </section>
         
-        <section class="testimonials">
-            <h2 class="section-title">O que nossos usuários dizem</h2>
+        <section class="features animate-on-scroll">
+            <h2 class="section-title">O que o LazzPace oferece</h2>
             
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"O LazzPace me ajudou a planejar melhor meus treinos e provas. Ferramenta essencial para qualquer corredor!"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Mariana Silva</h4>
-                            <p>Corredora amadora</p>
-                        </div>
-                    </div>
+            <div class="cards-container">
+                <div class="feature-card">
+                    <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Calculadora Precisa</h3>
+                    <p>Calcule seu pace, tempo ou distância com nossa ferramenta intuitiva.</p>
+                    <a href="calculator.php" class="card-link">Usar calculadora <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"Interface intuitiva e cálculos precisos. Uso diariamente para acompanhar minha evolução nas corridas."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Carlos Santos</h4>
-                            <p>Maratonista</p>
-                        </div>
-                    </div>
+                <div class="feature-card">
+                    <div class="card-icon"><i class="fas fa-table"></i></div>
+                    <h3>Tabelas de Referência</h3>
+                    <p>Consulte tempos estimados para diversas distâncias baseados no seu pace.</p>
+                    <a href="tables.php" class="card-link">Ver tabelas <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="card-icon"><i class="fas fa-running"></i></div>
+                    <h3>Dicas Profissionais</h3>
+                    <p>Aprenda a melhorar seu desempenho com dicas de especialistas.</p>
+                    <a href="tips.php" class="card-link">Ver dicas <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -172,6 +145,10 @@
             </div>
         </div>
     </footer>
+
+    <div class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <script src="script.js"></script>
 </body>

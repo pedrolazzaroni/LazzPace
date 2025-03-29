@@ -1,4 +1,65 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Preloader functionality
+    const preloader = document.querySelector('.preloader');
+    const progress = document.querySelector('.progress');
+    
+    if (preloader) {
+        let width = 0;
+        const interval = setInterval(() => {
+            width += 5;
+            progress.style.width = width + '%';
+            
+            if (width >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    document.body.classList.add('page-visible');
+                }, 300);
+            }
+        }, 50);
+    }
+    
+    // Animation on scroll
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    function checkScroll() {
+        animateElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const triggerPoint = window.innerHeight * 0.8;
+            
+            if (elementTop < triggerPoint) {
+                element.classList.add('show');
+            }
+        });
+    }
+    
+    // Check elements on initial load
+    setTimeout(checkScroll, 500);
+    
+    // Check elements on scroll
+    window.addEventListener('scroll', checkScroll);
+    
+    // Page transition effect
+    document.body.classList.add('page-visible');
+    
+    // Handle link clicks for page transitions
+    const links = document.querySelectorAll('a:not([target="_blank"])');
+    links.forEach(link => {
+        if (link.hostname === window.location.hostname) {
+            link.addEventListener('click', function(e) {
+                if (!e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    const destination = this.getAttribute('href');
+                    document.body.classList.remove('page-visible');
+                    
+                    setTimeout(() => {
+                        window.location.href = destination;
+                    }, 300);
+                }
+            });
+        }
+    });
+    
     // Theme switcher functionality
     const themeSwitch = document.querySelector('.theme-switch input');
     
@@ -22,6 +83,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.classList.remove('dark-theme');
                 localStorage.setItem('theme', 'light');
             }
+        });
+    }
+    
+    // Scroll to top button
+    const scrollTopButton = document.querySelector('.scroll-to-top');
+    
+    if (scrollTopButton) {
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopButton.classList.add('active');
+            } else {
+                scrollTopButton.classList.remove('active');
+            }
+        });
+        
+        scrollTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     }
     

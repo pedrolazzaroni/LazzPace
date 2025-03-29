@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
-<body>
+<body class="page-transition">
     <nav class="main-navbar">
         <div class="container navbar-container">
             <div class="logo">
@@ -24,15 +24,15 @@
                 <li><a href="tables.php"><i class="fas fa-table"></i> Tabelas</a></li>
                 <li><a href="about.php"><i class="fas fa-info-circle"></i> Sobre Pace</a></li>
                 <li><a href="tips.php"><i class="fas fa-lightbulb"></i> Dicas</a></li>
-                <li class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <span class="slider"></span>
-                        <i class="fas fa-sun theme-icon sun-icon"></i>
-                        <i class="fas fa-moon theme-icon moon-icon"></i>
-                    </label>
-                </li>
             </ul>
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch" class="theme-switch-input">
+                <label for="theme-switch" class="theme-switch-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
         </div>
     </nav>
 
@@ -178,6 +178,10 @@
             </div>
         </div>
     </footer>
+
+    <div class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <script src="script.js"></script>
 </body>
