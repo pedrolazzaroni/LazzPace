@@ -49,84 +49,9 @@
         </div>
     </nav>
 
-    <!-- Conteúdo dinâmico será carregado aqui -->
-    <div id="app-container">
-        <!-- Página inicial (home) como conteúdo padrão -->
-        <div id="home-content" class="page-content active">
-            <header class="hero">
-                <div class="container hero-content">
-                    <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
-                    <a href="#/calculator" data-page="calculator" class="btn btn-primary btn-pulse nav-link">Calculadora completa</a>
-                </div>
-            </header>
-
-            <main class="container">
-                <section class="quick-calc animate-on-scroll">
-                    <div class="card">
-                        <h2>Cálculo Rápido</h2>
-                        <p>Faça um cálculo rápido de pace com nossa mini calculadora:</p>
-                        <form id="quick-pace-calculator" class="animated-form">
-                            <div class="form-group">
-                                <label for="quick-distance">Distância (km)</label>
-                                <input type="number" id="quick-distance" min="0" step="0.01" class="animated-input" placeholder="Ex: 5">
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="quick-minutes">Minutos</label>
-                                    <input type="number" id="quick-minutes" min="0" class="animated-input" placeholder="Min">
-                                </div>
-                                <div class="form-group">
-                                    <label for="quick-seconds">Segundos</label>
-                                    <input type="number" id="quick-seconds" min="0" max="59" class="animated-input" placeholder="Seg">
-                                </div>
-                            </div>
-                            
-                            <button type="button" id="quick-calculate-btn" class="btn-pulse">Calcular Pace</button>
-                            
-                            <div id="quick-result" class="result-box" style="display: none;">
-                                <span>Seu pace é:</span>
-                                <div id="quick-pace-result">--:--</div>
-                                <div class="min-km">min/km</div>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-                
-                <section class="features animate-on-scroll">
-                    <h2 class="section-title">O que o LazzPace oferece</h2>
-                    
-                    <div class="cards-container">
-                        <div class="feature-card">
-                            <div class="card-icon"><i class="fas fa-calculator"></i></div>
-                            <h3>Calculadora Precisa</h3>
-                            <p>Calcule seu pace, tempo ou distância com nossa ferramenta intuitiva.</p>
-                            <a href="#/calculator" data-page="calculator" class="card-link nav-link">Usar calculadora <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="card-icon"><i class="fas fa-table"></i></div>
-                            <h3>Tabelas de Referência</h3>
-                            <p>Consulte tempos estimados para diversas distâncias baseados no seu pace.</p>
-                            <a href="#/tables" data-page="tables" class="card-link nav-link">Ver tabelas <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="card-icon"><i class="fas fa-running"></i></div>
-                            <h3>Dicas Profissionais</h3>
-                            <p>Aprenda a melhorar seu desempenho com dicas de especialistas.</p>
-                            <a href="#/tips" data-page="tips" class="card-link nav-link">Ver dicas <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </div>
-
-        <!-- Outros conteúdos ficarão ocultos até serem ativados -->
-        <div id="calculator-content" class="page-content"></div>
-        <div id="tables-content" class="page-content"></div>
-        <div id="about-content" class="page-content"></div>
-        <div id="tips-content" class="page-content"></div>
+    <!-- MUDANÇA AQUI: Único container para todo o conteúdo -->
+    <div id="main-content" class="page-content">
+        <!-- Conteúdo inicial será carregado aqui -->
     </div>
 
     <footer>

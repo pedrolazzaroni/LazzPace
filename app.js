@@ -19,64 +19,139 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 50);
     }
 
-    // Improved SPA Navigation
-    const appContainer = document.getElementById('app-container');
-    const contentContainers = document.querySelectorAll('.page-content');
+    // Single Page Application (SPA) Navigation
+    const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Templates para cada página
+    const templates = {
+        home: `
+            <header class="hero">
+                <div class="container hero-content">
+                    <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
+                    <a href="#/calculator" data-page="calculator" class="btn btn-primary btn-pulse nav-link">Calculadora completa</a>
+                </div>
+            </header>
+
+            <main class="container">
+                <section class="quick-calc animate-on-scroll">
+                    <div class="card">
+                        <h2>Cálculo Rápido</h2>
+                        <p>Faça um cálculo rápido de pace com nossa mini calculadora:</p>
+                        <form id="quick-pace-calculator" class="animated-form">
+                            <div class="form-group">
+                                <label for="quick-distance">Distância (km)</label>
+                                <input type="number" id="quick-distance" min="0" step="0.01" class="animated-input" placeholder="Ex: 5">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="quick-minutes">Minutos</label>
+                                    <input type="number" id="quick-minutes" min="0" class="animated-input" placeholder="Min">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quick-seconds">Segundos</label>
+                                    <input type="number" id="quick-seconds" min="0" max="59" class="animated-input" placeholder="Seg">
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="quick-calculate-btn" class="btn-pulse">Calcular Pace</button>
+                            
+                            <div id="quick-result" class="result-box" style="display: none;">
+                                <span>Seu pace é:</span>
+                                <div id="quick-pace-result">--:--</div>
+                                <div class="min-km">min/km</div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                
+                <section class="features animate-on-scroll">
+                    <h2 class="section-title">O que o LazzPace oferece</h2>
+                    
+                    <div class="cards-container">
+                        <div class="feature-card">
+                            <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                            <h3>Calculadora Precisa</h3>
+                            <p>Calcule seu pace, tempo ou distância com nossa ferramenta intuitiva.</p>
+                            <a href="#/calculator" data-page="calculator" class="card-link nav-link">Usar calculadora <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon"><i class="fas fa-table"></i></div>
+                            <h3>Tabelas de Referência</h3>
+                            <p>Consulte tempos estimados para diversas distâncias baseados no seu pace.</p>
+                            <a href="#/tables" data-page="tables" class="card-link nav-link">Ver tabelas <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon"><i class="fas fa-running"></i></div>
+                            <h3>Dicas Profissionais</h3>
+                            <p>Aprenda a melhorar seu desempenho com dicas de especialistas.</p>
+                            <a href="#/tips" data-page="tips" class="card-link nav-link">Ver dicas <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        `
+    };
     
     // Carrega o conteúdo das páginas dinamicamente
     async function loadContent(page) {
-        // Verifica se estamos na mesma página
-        const currentActivePage = document.querySelector('.page-content.active');
-        const currentPageId = currentActivePage ? currentActivePage.id.replace('-content', '') : null;
+        // Adiciona uma classe de transição de saída para animar
+        mainContent.classList.add('page-exit');
         
-        // Se já estivermos na página solicitada, não faça nada
-        if (currentPageId === page) {
-            return;
-        }
+        // Aguarda a animação de saída
+        await new Promise(resolve => setTimeout(resolve, 300));
         
-        // Adiciona classe para animar a saída da página atual
-        if (currentActivePage) {
-            currentActivePage.classList.add('page-exit');
+        // Se for a página inicial, usa o template já definido
+        if (page === 'home' && templates.home) {
+            mainContent.innerHTML = templates.home;
+            mainContent.classList.remove('page-exit');
+            mainContent.classList.add('page-enter');
             
-            // Aguarda a animação de saída completar
-            await new Promise(resolve => setTimeout(resolve, 300));
-        }
-        
-        const targetContainer = document.getElementById(`${page}-content`);
-        
-        // Carrega o conteúdo se ainda não tiver sido carregado
-        if (targetContainer && targetContainer.innerHTML.trim() === '') {
+            // Inicializa elementos da página inicial
+            initHomePage();
+        } else {
+            // Para outras páginas, carrega o HTML do servidor
             try {
-                // Adiciona classe de loading ao container
-                targetContainer.classList.add('loading');
+                // Mostra um indicador de carregamento
+                mainContent.innerHTML = `
+                    <div class="loading-container">
+                        <div class="loading-spinner"></div>
+                        <p>Carregando...</p>
+                    </div>
+                `;
                 
+                // Busca o conteúdo da página
                 const response = await fetch(`partials/${page}.html`);
                 if (!response.ok) {
-                    throw new Error(`Failed to load ${page} content.`);
+                    throw new Error(`Falha ao carregar o conteúdo da página ${page}.`);
                 }
+                
+                // Obtém o HTML e insere no container
                 const content = await response.text();
-                targetContainer.innerHTML = content;
+                mainContent.innerHTML = content;
                 
-                // Remove classe de loading
-                targetContainer.classList.remove('loading');
+                // Reinicia a animação
+                mainContent.classList.remove('page-exit');
+                mainContent.classList.add('page-enter');
                 
-                // Dispara evento para inicializar funcionalidades específicas da página
-                document.dispatchEvent(new CustomEvent('page-loaded', { 
-                    detail: { page: page } 
-                }));
+                // Inicializa os scripts específicos da página
+                initPageScripts(page);
             } catch (error) {
-                console.error('Error loading content:', error);
-                targetContainer.innerHTML = `
+                console.error('Erro ao carregar conteúdo:', error);
+                mainContent.innerHTML = `
                     <div class="error-message">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <p>Não foi possível carregar o conteúdo. Tente novamente.</p>
+                        <h2>Não foi possível carregar o conteúdo</h2>
+                        <p>${error.message}</p>
                         <button class="retry-btn" data-page="${page}">Tentar novamente</button>
                     </div>
                 `;
                 
                 // Adiciona evento ao botão de retry
-                const retryBtn = targetContainer.querySelector('.retry-btn');
+                const retryBtn = mainContent.querySelector('.retry-btn');
                 if (retryBtn) {
                     retryBtn.addEventListener('click', function() {
                         loadContent(this.getAttribute('data-page'));
@@ -84,14 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
-        // Esconde todos os containers e mostra apenas o solicitado
-        contentContainers.forEach(cont => {
-            cont.classList.remove('active', 'page-exit', 'page-enter');
-        });
-        
-        // Adiciona classe para animar a entrada da nova página
-        targetContainer.classList.add('active', 'page-enter');
         
         // Atualiza os links ativos na navegação
         navLinks.forEach(link => {
@@ -101,8 +168,110 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Rola para o topo com animação
+        // Rola suavemente para o topo
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Reinicializa efeitos de animação
+        setTimeout(() => {
+            initAnimations();
+        }, 100);
+    }
+    
+    // Inicializa os scripts específicos de cada página
+    function initPageScripts(page) {
+        if (page === 'calculator') {
+            initCalculator();
+        } else if (page === 'tables') {
+            initTables();
+        }
+        
+        // Adiciona efeito de ripple nos botões da página
+        addRippleEffect();
+    }
+    
+    // Inicializa a página inicial
+    function initHomePage() {
+        // Quick calculator functionality on homepage
+        const quickDistance = document.getElementById('quick-distance');
+        const quickMinutes = document.getElementById('quick-minutes');
+        const quickSeconds = document.getElementById('quick-seconds');
+        const quickCalculateBtn = document.getElementById('quick-calculate-btn');
+        const quickResult = document.getElementById('quick-result');
+        const quickPaceResult = document.getElementById('quick-pace-result');
+        
+        if (quickCalculateBtn) {
+            quickCalculateBtn.addEventListener('click', function() {
+                const distance = parseFloat(quickDistance.value) || 0;
+                const minutes = parseInt(quickMinutes.value) || 0;
+                const seconds = parseInt(quickSeconds.value) || 0;
+                
+                if (distance <= 0) {
+                    showAlert('Por favor, informe uma distância válida.');
+                    return;
+                }
+                
+                if (minutes === 0 && seconds === 0) {
+                    showAlert('Por favor, informe um tempo válido.');
+                    return;
+                }
+                
+                const totalSeconds = (minutes * 60) + seconds;
+                const paceSeconds = totalSeconds / distance;
+                const paceMinutes = Math.floor(paceSeconds / 60);
+                const paceRemainingSeconds = Math.round(paceSeconds % 60);
+                
+                const formattedPace = `${paceMinutes}:${paceRemainingSeconds.toString().padStart(2, '0')}`;
+                
+                quickPaceResult.textContent = formattedPace;
+                
+                // Anima a exibição do resultado
+                if (quickResult.style.display === 'none' || quickResult.style.display === '') {
+                    quickResult.style.display = 'block';
+                    quickResult.classList.add('result-reveal');
+                    
+                    setTimeout(() => {
+                        quickResult.classList.remove('result-reveal');
+                    }, 1000);
+                } else {
+                    quickResult.classList.add('result-update');
+                    
+                    setTimeout(() => {
+                        quickResult.classList.remove('result-update');
+                    }, 500);
+                }
+            });
+        }
+        
+        // Inicializa o efeito ripple
+        addRippleEffect();
+        
+        // Re-inicializa os links da página inicial
+        const homeNavLinks = mainContent.querySelectorAll('.nav-link');
+        homeNavLinks.forEach(link => {
+            link.addEventListener('click', handleNavClick);
+        });
+    }
+    
+    // Inicializa as animações com base na rolagem
+    function initAnimations() {
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const triggerPoint = window.innerHeight * 0.8;
+                
+                if (elementTop < triggerPoint) {
+                    element.classList.add('show');
+                }
+            });
+        }
+        
+        // Executa uma vez no início
+        setTimeout(checkScroll, 100);
+        
+        // Adiciona evento de scroll
+        window.addEventListener('scroll', checkScroll);
     }
     
     // Atualiza a URL e carrega o conteúdo
@@ -111,24 +280,27 @@ document.addEventListener('DOMContentLoaded', function() {
         loadContent(page);
     }
     
+    // Handler para cliques nos links de navegação
+    function handleNavClick(e) {
+        e.preventDefault();
+        const page = this.getAttribute('data-page');
+        
+        // Aplica efeito de ripple ao link
+        const ripple = document.createElement('span');
+        ripple.classList.add('nav-link-ripple');
+        this.appendChild(ripple);
+        
+        // Remove o ripple após a animação
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+        
+        navigateTo(page);
+    }
+    
     // Adiciona evento de clique em todos os links de navegação
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const page = this.getAttribute('data-page');
-            
-            // Adiciona efeito de ripple nos links
-            const ripple = document.createElement('span');
-            ripple.classList.add('nav-link-ripple');
-            this.appendChild(ripple);
-            
-            // Remove o ripple após a animação
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-            
-            navigateTo(page);
-        });
+        link.addEventListener('click', handleNavClick);
     });
     
     // Manipula o carregamento inicial e a navegação pelo histórico
@@ -148,26 +320,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Carregamento inicial da rota
     handleRoute();
-    
-    // Animation on scroll
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
-    function checkScroll() {
-        animateElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const triggerPoint = window.innerHeight * 0.8;
-            
-            if (elementTop < triggerPoint) {
-                element.classList.add('show');
-            }
-        });
-    }
-    
-    // Verifica elementos no carregamento inicial
-    setTimeout(checkScroll, 500);
-    
-    // Verifica elementos ao rolar
-    window.addEventListener('scroll', checkScroll);
     
     // Theme switcher with improved animation
     const themeSwitch = document.getElementById('theme-switch');
@@ -243,24 +395,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
         });
     }
-    
-    // Inicializa funcionalidades específicas de cada página
-    document.addEventListener('page-loaded', function(e) {
-        const page = e.detail.page;
-        
-        // Inicializa calculadora
-        if (page === 'calculator') {
-            initCalculator();
-        }
-        
-        // Inicializa tabelas
-        if (page === 'tables') {
-            initTables();
-        }
-        
-        // Adiciona efeito de ripple em todos os botões da página carregada
-        addRippleEffect();
-    });
     
     // Adiciona efeito de ripple em todos os botões
     function addRippleEffect() {
