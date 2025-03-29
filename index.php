@@ -29,90 +29,105 @@
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="nav-links">
-                <li><a href="index.php" class="active"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="calculator.php"><i class="fas fa-calculator"></i> Calculadora</a></li>
-                <li><a href="tables.php"><i class="fas fa-table"></i> Tabelas</a></li>
-                <li><a href="about.php"><i class="fas fa-info-circle"></i> Sobre Pace</a></li>
-                <li><a href="tips.php"><i class="fas fa-lightbulb"></i> Dicas</a></li>
+                <li><a href="#/" data-page="home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#/calculator" data-page="calculator" class="nav-link"><i class="fas fa-calculator"></i> Calculadora</a></li>
+                <li><a href="#/tables" data-page="tables" class="nav-link"><i class="fas fa-table"></i> Tabelas</a></li>
+                <li><a href="#/about" data-page="about" class="nav-link"><i class="fas fa-info-circle"></i> Sobre Pace</a></li>
+                <li><a href="#/tips" data-page="tips" class="nav-link"><i class="fas fa-lightbulb"></i> Dicas</a></li>
             </ul>
-            <div class="theme-toggle">
-                <input type="checkbox" id="theme-switch" class="theme-switch-input">
-                <label for="theme-switch" class="theme-switch-label">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                    <span class="ball"></span>
-                </label>
+            <div class="theme-container">
+                <div class="theme-switcher">
+                    <input type="checkbox" id="theme-switch" class="theme-switch-input">
+                    <label for="theme-switch" class="theme-switch-label">
+                        <div class="sun-moon-container">
+                            <div class="sun"><i class="fas fa-sun"></i></div>
+                            <div class="moon"><i class="fas fa-moon"></i></div>
+                        </div>
+                    </label>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container hero-content">
-            <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
-            <a href="calculator.php" class="btn btn-primary btn-pulse">Calculadora completa</a>
-        </div>
-    </header>
+    <!-- Conteúdo dinâmico será carregado aqui -->
+    <div id="app-container">
+        <!-- Página inicial (home) como conteúdo padrão -->
+        <div id="home-content" class="page-content active">
+            <header class="hero">
+                <div class="container hero-content">
+                    <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
+                    <a href="#/calculator" data-page="calculator" class="btn btn-primary btn-pulse nav-link">Calculadora completa</a>
+                </div>
+            </header>
 
-    <main class="container">
-        <section class="quick-calc animate-on-scroll">
-            <div class="card">
-                <h2>Cálculo Rápido</h2>
-                <p>Faça um cálculo rápido de pace com nossa mini calculadora:</p>
-                <form id="quick-pace-calculator" class="animated-form">
-                    <div class="form-group">
-                        <label for="quick-distance">Distância (km)</label>
-                        <input type="number" id="quick-distance" min="0" step="0.01" class="animated-input" placeholder="Ex: 5">
+            <main class="container">
+                <section class="quick-calc animate-on-scroll">
+                    <div class="card">
+                        <h2>Cálculo Rápido</h2>
+                        <p>Faça um cálculo rápido de pace com nossa mini calculadora:</p>
+                        <form id="quick-pace-calculator" class="animated-form">
+                            <div class="form-group">
+                                <label for="quick-distance">Distância (km)</label>
+                                <input type="number" id="quick-distance" min="0" step="0.01" class="animated-input" placeholder="Ex: 5">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="quick-minutes">Minutos</label>
+                                    <input type="number" id="quick-minutes" min="0" class="animated-input" placeholder="Min">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quick-seconds">Segundos</label>
+                                    <input type="number" id="quick-seconds" min="0" max="59" class="animated-input" placeholder="Seg">
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="quick-calculate-btn" class="btn-pulse">Calcular Pace</button>
+                            
+                            <div id="quick-result" class="result-box" style="display: none;">
+                                <span>Seu pace é:</span>
+                                <div id="quick-pace-result">--:--</div>
+                                <div class="min-km">min/km</div>
+                            </div>
+                        </form>
                     </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="quick-minutes">Minutos</label>
-                            <input type="number" id="quick-minutes" min="0" class="animated-input" placeholder="Min">
-                        </div>
-                        <div class="form-group">
-                            <label for="quick-seconds">Segundos</label>
-                            <input type="number" id="quick-seconds" min="0" max="59" class="animated-input" placeholder="Seg">
-                        </div>
-                    </div>
-                    
-                    <button type="button" id="quick-calculate-btn" class="btn-pulse">Calcular Pace</button>
-                    
-                    <div id="quick-result" class="result-box" style="display: none;">
-                        <span>Seu pace é:</span>
-                        <div id="quick-pace-result">--:--</div>
-                        <div class="min-km">min/km</div>
-                    </div>
-                </form>
-            </div>
-        </section>
-        
-        <section class="features animate-on-scroll">
-            <h2 class="section-title">O que o LazzPace oferece</h2>
-            
-            <div class="cards-container">
-                <div class="feature-card">
-                    <div class="card-icon"><i class="fas fa-calculator"></i></div>
-                    <h3>Calculadora Precisa</h3>
-                    <p>Calcule seu pace, tempo ou distância com nossa ferramenta intuitiva.</p>
-                    <a href="calculator.php" class="card-link">Usar calculadora <i class="fas fa-arrow-right"></i></a>
-                </div>
+                </section>
                 
-                <div class="feature-card">
-                    <div class="card-icon"><i class="fas fa-table"></i></div>
-                    <h3>Tabelas de Referência</h3>
-                    <p>Consulte tempos estimados para diversas distâncias baseados no seu pace.</p>
-                    <a href="tables.php" class="card-link">Ver tabelas <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="card-icon"><i class="fas fa-running"></i></div>
-                    <h3>Dicas Profissionais</h3>
-                    <p>Aprenda a melhorar seu desempenho com dicas de especialistas.</p>
-                    <a href="tips.php" class="card-link">Ver dicas <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-    </main>
+                <section class="features animate-on-scroll">
+                    <h2 class="section-title">O que o LazzPace oferece</h2>
+                    
+                    <div class="cards-container">
+                        <div class="feature-card">
+                            <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                            <h3>Calculadora Precisa</h3>
+                            <p>Calcule seu pace, tempo ou distância com nossa ferramenta intuitiva.</p>
+                            <a href="#/calculator" data-page="calculator" class="card-link nav-link">Usar calculadora <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon"><i class="fas fa-table"></i></div>
+                            <h3>Tabelas de Referência</h3>
+                            <p>Consulte tempos estimados para diversas distâncias baseados no seu pace.</p>
+                            <a href="#/tables" data-page="tables" class="card-link nav-link">Ver tabelas <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon"><i class="fas fa-running"></i></div>
+                            <h3>Dicas Profissionais</h3>
+                            <p>Aprenda a melhorar seu desempenho com dicas de especialistas.</p>
+                            <a href="#/tips" data-page="tips" class="card-link nav-link">Ver dicas <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Outros conteúdos ficarão ocultos até serem ativados -->
+        <div id="calculator-content" class="page-content"></div>
+        <div id="tables-content" class="page-content"></div>
+        <div id="about-content" class="page-content"></div>
+        <div id="tips-content" class="page-content"></div>
+    </div>
 
     <footer>
         <div class="container">
@@ -124,10 +139,10 @@
                 <div class="footer-links">
                     <h3>Links Rápidos</h3>
                     <ul>
-                        <li><a href="calculator.php">Calculadora</a></li>
-                        <li><a href="tables.php">Tabelas</a></li>
-                        <li><a href="about.php">Sobre Pace</a></li>
-                        <li><a href="tips.php">Dicas</a></li>
+                        <li><a href="#/calculator" data-page="calculator" class="nav-link">Calculadora</a></li>
+                        <li><a href="#/tables" data-page="tables" class="nav-link">Tabelas</a></li>
+                        <li><a href="#/about" data-page="about" class="nav-link">Sobre Pace</a></li>
+                        <li><a href="#/tips" data-page="tips" class="nav-link">Dicas</a></li>
                     </ul>
                 </div>
                 <div class="social-links">
@@ -150,6 +165,6 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

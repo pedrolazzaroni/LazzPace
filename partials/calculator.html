@@ -1,0 +1,110 @@
+<header class="page-header">
+    <div class="container">
+        <h1>Calculadora de Pace</h1>
+        <p>Calcule seu pace, tempo ou distância com precisão</p>
+    </div>
+</header>
+
+<main class="container">
+    <section class="calculator-section">
+        <div class="card calculator-card">
+            <h2><i class="fas fa-calculator"></i> Calculadora de Pace</h2>
+            <form id="pace-calculator" class="animated-form">
+                <div class="form-group">
+                    <label for="calc-type">O que deseja calcular?</label>
+                    <select id="calc-type" class="animated-input">
+                        <option value="pace">Pace (min/km)</option>
+                        <option value="time">Tempo total</option>
+                        <option value="distance">Distância</option>
+                    </select>
+                </div>
+
+                <div class="form-row" id="time-inputs">
+                    <div class="form-group">
+                        <label for="hours">Horas</label>
+                        <input type="number" id="hours" min="0" value="0" class="animated-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="minutes">Minutos</label>
+                        <input type="number" id="minutes" min="0" max="59" value="0" class="animated-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="seconds">Segundos</label>
+                        <input type="number" id="seconds" min="0" max="59" value="0" class="animated-input">
+                    </div>
+                </div>
+
+                <div class="form-group" id="distance-input">
+                    <label for="distance">Distância (km)</label>
+                    <input type="number" id="distance" min="0" step="0.01" value="0" class="animated-input">
+                </div>
+
+                <div class="form-group" id="pace-inputs" style="display: none;">
+                    <label for="pace-minutes">Pace (min:seg por km)</label>
+                    <div class="form-row">
+                        <input type="number" id="pace-minutes" min="0" max="59" value="0" placeholder="min" class="animated-input">
+                        <span>:</span>
+                        <input type="number" id="pace-seconds" min="0" max="59" value="0" placeholder="seg" class="animated-input">
+                    </div>
+                </div>
+
+                <button type="button" id="calculate-btn" class="btn-pulse">Calcular</button>
+            </form>
+        </div>
+
+        <div class="card result-card" id="result-card" style="display: none;">
+            <h2><i class="fas fa-chart-line"></i> Resultado</h2>
+            <div class="result-container">
+                <div id="result-value" class="result-value">--:--</div>
+                <div id="result-label" class="result-label">Pace (min/km)</div>
+            </div>
+            <div class="result-extras">
+                <h3>Tempos equivalentes</h3>
+                <div class="extra-items">
+                    <div class="extra-item">
+                        <div class="extra-label">Equivalente 5K</div>
+                        <div id="equiv-5k" class="extra-value">--:--</div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-label">Equivalente 10K</div>
+                        <div id="equiv-10k" class="extra-value">--:--</div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-label">Meia Maratona</div>
+                        <div id="equiv-half" class="extra-value">--:--</div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-label">Maratona</div>
+                        <div id="equiv-full" class="extra-value">--:--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="common-distances">
+        <h2 class="section-title">Distâncias Comuns</h2>
+        <div class="distance-cards">
+            <div class="distance-card">
+                <div class="distance-icon"><i class="fas fa-running"></i></div>
+                <h3>5K</h3>
+                <p>Distância popular para iniciantes</p>
+            </div>
+            <div class="distance-card">
+                <div class="distance-icon"><i class="fas fa-running"></i></div>
+                <h3>10K</h3>
+                <p>Desafio intermediário</p>
+            </div>
+            <div class="distance-card">
+                <div class="distance-icon"><i class="fas fa-running"></i></div>
+                <h3>21K</h3>
+                <p>Meia maratona</p>
+            </div>
+            <div class="distance-card">
+                <div class="distance-icon"><i class="fas fa-running"></i></div>
+                <h3>42K</h3>
+                <p>Maratona completa</p>
+            </div>
+        </div>
+    </section>
+</main>
