@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body class="page-transition">
-    <!-- Preloader -->
     <div class="preloader">
         <div class="loader">
             <i class="fas fa-running running-icon"></i>
