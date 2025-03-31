@@ -124,6 +124,67 @@
         </div>
     </div>
 
+    <!-- Conteúdo alternativo embutido (oculto por padrão) -->
+    <div id="calculator-content" style="display: none;">
+        <!-- Conteúdo copiado de partials/calculator.html -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Calculadora de Pace</h1>
+                <p>Calcule seu pace, tempo ou distância com precisão</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- ... conteúdo do calculator.html ... -->
+            <p>Carregando calculadora...</p>
+        </main>
+    </div>
+
+    <div id="tables-content" style="display: none;">
+        <!-- Conteúdo resumido de partials/tables.html -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Tabelas de Referência</h1>
+                <p>Consulte o tempo estimado para diferentes distâncias baseado no pace</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- ... conteúdo do tables.html ... -->
+            <p>Carregando tabelas...</p>
+        </main>
+    </div>
+
+    <div id="about-content" style="display: none;">
+        <!-- Conteúdo resumido de partials/about.html -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Sobre Pace</h1>
+                <p>Entenda o conceito de pace e sua importância para corredores</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- ... conteúdo do about.html ... -->
+            <p>Carregando conteúdo sobre pace...</p>
+        </main>
+    </div>
+
+    <div id="tips-content" style="display: none;">
+        <!-- Conteúdo resumido de partials/tips.html -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Dicas para Melhorar seu Pace</h1>
+                <p>Estratégias e técnicas para aumentar seu desempenho na corrida</p>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- ... conteúdo do tips.html ... -->
+            <p>Carregando dicas...</p>
+        </main>
+    </div>
+
     <!-- Footer - Redesigned -->
     <footer>
         <div class="container">
@@ -173,5 +234,24 @@
 
     <!-- Scripts -->
     <script src="app.js"></script>
+    
+    <!-- Debug info - remova após resolução do problema -->
+    <script>
+        console.log('Página carregada. Verificando recursos:');
+        
+        // Verificar se os scripts estão sendo carregados
+        fetch('app.js')
+            .then(response => {
+                console.log(`app.js: ${response.status === 200 ? 'OK' : 'Falha!'}`);
+            })
+            .catch(error => console.error('Erro ao verificar app.js:', error));
+            
+        // Verificar se os partials estão acessíveis
+        fetch('partials/about.html')
+            .then(response => {
+                console.log(`partials/about.html: ${response.status === 200 ? 'OK' : 'Falha!'}`);
+            })
+            .catch(error => console.error('Erro ao verificar partials/about.html:', error));
+    </script>
 </body>
 </html>

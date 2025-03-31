@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carrega o conteúdo das páginas dinamicamente
     async function loadContent(page) {
         try {
+            console.log(`Tentando carregar página: ${page}`);
+            
             // Se estamos na página inicial, apenas mostre o conteúdo já presente
             if (page === 'home') {
                 // Adicionar efeito de transição
@@ -33,16 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 await new Promise(resolve => setTimeout(resolve, 300));
                 
-                // Ocultar todos os partials
-                document.querySelectorAll('.page-partial').forEach(partial => {
-                    partial.style.display = 'none';
-                });
-                
-                // Mostrar o partial da home
-                const homePartial = document.getElementById('home-partial');
-                if (homePartial) {
-                    homePartial.style.display = 'block';
-                }
+                // Mostrar o conteúdo da home que já está no DOM
+                mainContent.innerHTML = document.getElementById('home-content').outerHTML;
                 
                 mainContent.classList.remove('page-exit');
                 mainContent.classList.add('page-enter');
@@ -50,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     mainContent.classList.remove('page-enter');
                 }, 500);
+                
+                // Reinicializar a calculadora rápida na home
+                initHomePage();
                 
                 updateActiveLinks(page);
                 return;
@@ -78,37 +75,43 @@ document.addEventListener('DOMContentLoaded', function() {
                     dot.style.animation = `dotFade 1.5s ${index * 0.2}s infinite`;
                 });
                 
-                // Carregar o conteúdo do partial do servidor
-                const response = await fetch(`partials/${page}.html`);
-                if (!response.ok) {
-                    throw new Error(`Falha ao carregar o conteúdo da página ${page}.`);
+                console.log(`Buscando arquivo: partials/${page}.html`);
+                
+                try {
+                    // Carregar o conteúdo do partial do servidor
+                    const response = await fetch(`partials/${page}.html`);
+                    
+                    if (!response.ok) {
+                        console.error(`Erro HTTP: ${response.status} ao carregar ${page}.html`);
+                        throw new Error(`Falha ao carregar o conteúdo da página ${page}. Status: ${response.status}`);
+                    }
+                    
+                    // Simular um pequeno delay para uma experiência mais suave
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    
+                    // Criar o elemento do partial
+                    const content = await response.text();
+                    console.log(`Conteúdo carregado para ${page}, tamanho: ${content.length} caracteres`);
+                    
+                    mainContent.innerHTML = content;
+                } catch (fetchError) {
+                    console.error('Erro ao fazer fetch:', fetchError);
+                    
+                    // Fallback - carregar conteúdo embutido se disponível
+                    console.log('Tentando usar conteúdo embutido...');
+                    
+                    // Verificar se existe um elemento com o ID correspondente na página
+                    const fallbackContent = document.getElementById(`${page}-content`);
+                    if (fallbackContent) {
+                        console.log(`Usando conteúdo embutido para ${page}`);
+                        mainContent.innerHTML = fallbackContent.innerHTML;
+                    } else {
+                        throw fetchError; // Se não houver fallback, propagar o erro
+                    }
                 }
-                
-                // Simular um pequeno delay para uma experiência mais suave
-                await new Promise(resolve => setTimeout(resolve, 300));
-                
-                // Criar o elemento do partial
-                const content = await response.text();
-                const tempContainer = document.createElement('div');
-                tempContainer.innerHTML = content;
-                
-                // Ocultar todos os partials existentes
-                document.querySelectorAll('.page-partial').forEach(p => {
-                    p.style.display = 'none';
-                });
-                
-                // Criar o novo partial e adicioná-lo ao DOM
-                partial = document.createElement('div');
-                partial.id = `${page}-partial`;
-                partial.className = 'page-partial';
-                partial.innerHTML = content;
-                mainContent.appendChild(partial);
             } else {
-                // Se o partial já existe, apenas mostre-o e oculte os outros
-                document.querySelectorAll('.page-partial').forEach(p => {
-                    p.style.display = 'none';
-                });
-                partial.style.display = 'block';
+                // Se o partial já existe, apenas mostre-o
+                mainContent.innerHTML = partial.innerHTML;
             }
             
             // Animar a entrada do conteúdo
@@ -136,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h2>Não foi possível carregar o conteúdo</h2>
                     <p>${error.message}</p>
                     <button class="retry-btn" data-page="${page}">Tentar novamente</button>
+                    <button class="home-btn" data-page="home">Voltar para Home</button>
                 </div>
             `;
             
@@ -144,6 +148,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (retryBtn) {
                 retryBtn.addEventListener('click', function() {
                     loadContent(this.getAttribute('data-page'));
+                });
+            }
+            
+            // Adiciona evento ao botão de voltar para home
+            const homeBtn = mainContent.querySelector('.home-btn');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function() {
+                    loadContent('home');
                 });
             }
         }
@@ -304,15 +316,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicialização
     function init() {
-        // Converter o conteúdo inicial em um partial
-        const initialContent = mainContent.innerHTML;
-        mainContent.innerHTML = '';
+        console.log('Inicializando aplicação...');
         
-        const homePartial = document.createElement('div');
-        homePartial.id = 'home-partial';
-        homePartial.className = 'page-partial';
-        homePartial.innerHTML = initialContent;
-        mainContent.appendChild(homePartial);
+        // Preservar o conteúdo inicial em vez de convertê-lo em partial
+        // Deixar o conteúdo inicial como está para garantir que ao menos a home funcione
         
         // Determinar a página inicial com base na URL
         let page = 'home';
@@ -321,6 +328,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (hash && hash !== '#/' && hash !== '#') {
             page = hash.replace('#/', '');
         }
+        
+        console.log(`Página inicial: ${page}`);
         
         // Carregar a página inicial
         loadContent(page);
