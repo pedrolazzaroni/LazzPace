@@ -1,302 +1,137 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Preloader functionality
+    // Preloader functionality - Acelerado
     const preloader = document.querySelector('.preloader');
     const progress = document.querySelector('.progress');
     
     if (preloader) {
         let width = 0;
         const interval = setInterval(() => {
-            width += 5;
+            width += 10; // Aumentado de 5 para 10 para acelerar
             progress.style.width = width + '%';
             
             if (width >= 100) {
                 clearInterval(interval);
-                setTimeout(() => {
-                    preloader.classList.add('fade-out');
-                    document.body.classList.add('page-visible');
-                }, 300);
+                // Remover atraso
+                preloader.classList.add('fade-out');
+                document.body.classList.add('page-visible');
             }
-        }, 50);
+        }, 20); // Reduzido de 50ms para 20ms
     }
 
-    // SPA Navigation - Improved version
-    const mainContent = document.getElementById('main-content');
+    // SPA Navigation - Simplificada para seções na mesma página
     const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
     
-    // Carrega o conteúdo das páginas dinamicamente
-    async function loadContent(page) {
-        try {
-            console.log(`Tentando carregar página: ${page}`);
-            
-            // Se estamos na página inicial, apenas mostre o conteúdo já presente
-            if (page === 'home') {
-                // Adicionar efeito de transição
-                mainContent.classList.add('page-exit');
-                
-                await new Promise(resolve => setTimeout(resolve, 300));
-                
-                // Mostrar o conteúdo da home que já está no DOM
-                mainContent.innerHTML = document.getElementById('home-content').outerHTML;
-                
-                mainContent.classList.remove('page-exit');
-                mainContent.classList.add('page-enter');
-                
-                setTimeout(() => {
-                    mainContent.classList.remove('page-enter');
-                }, 500);
-                
-                // Reinicializar a calculadora rápida na home
-                initHomePage();
-                
-                updateActiveLinks(page);
-                return;
-            }
-            
-            // Adicionar efeito de transição
-            mainContent.classList.add('page-exit');
-            
-            await new Promise(resolve => setTimeout(resolve, 300));
-            
-            // Verificar se o partial já está carregado
-            let partial = document.getElementById(`${page}-partial`);
-            
-            if (!partial) {
-                // Mostrar loader
-                mainContent.innerHTML = `
-                    <div class="loading-container">
-                        <div class="loading-spinner"></div>
-                        <p class="loading-text">Carregando<span class="dot-animation">.</span><span class="dot-animation">.</span><span class="dot-animation">.</span></p>
-                    </div>
-                `;
-                
-                // Animar os pontos
-                const dots = document.querySelectorAll('.dot-animation');
-                dots.forEach((dot, index) => {
-                    dot.style.animation = `dotFade 1.5s ${index * 0.2}s infinite`;
-                });
-                
-                console.log(`Buscando arquivo: partials/${page}.html`);
-                
-                try {
-                    // Carregar o conteúdo do partial do servidor
-                    const response = await fetch(`partials/${page}.html`);
-                    
-                    if (!response.ok) {
-                        console.error(`Erro HTTP: ${response.status} ao carregar ${page}.html`);
-                        throw new Error(`Falha ao carregar o conteúdo da página ${page}. Status: ${response.status}`);
-                    }
-                    
-                    // Simular um pequeno delay para uma experiência mais suave
-                    await new Promise(resolve => setTimeout(resolve, 300));
-                    
-                    // Criar o elemento do partial
-                    const content = await response.text();
-                    console.log(`Conteúdo carregado para ${page}, tamanho: ${content.length} caracteres`);
-                    
-                    mainContent.innerHTML = content;
-                } catch (fetchError) {
-                    console.error('Erro ao fazer fetch:', fetchError);
-                    
-                    // Fallback - carregar conteúdo embutido se disponível
-                    console.log('Tentando usar conteúdo embutido...');
-                    
-                    // Verificar se existe um elemento com o ID correspondente na página
-                    const fallbackContent = document.getElementById(`${page}-content`);
-                    if (fallbackContent) {
-                        console.log(`Usando conteúdo embutido para ${page}`);
-                        mainContent.innerHTML = fallbackContent.innerHTML;
-                    } else {
-                        throw fetchError; // Se não houver fallback, propagar o erro
-                    }
-                }
-            } else {
-                // Se o partial já existe, apenas mostre-o
-                mainContent.innerHTML = partial.innerHTML;
-            }
-            
-            // Animar a entrada do conteúdo
-            mainContent.classList.remove('page-exit');
-            mainContent.classList.add('page-enter');
+    // Variável global para controlar se uma navegação está em andamento
+    let isNavigating = false;
+    
+    // Nova função para mostrar/ocultar seções de conteúdo - Versão corrigida
+    function showSection(sectionId) {
+        console.log(`Navegando para: ${sectionId}`);
+        
+        // Se já houver uma navegação em andamento, ignorar
+        if (isNavigating) return;
+        isNavigating = true;
+        
+        // Adicionar classe de transição ao corpo
+        document.body.classList.add('page-transitioning');
+        
+        // Ocultar todas as seções
+        contentSections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Mostrar a seção selecionada
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            // Aplicar efeito de entrada
+            targetSection.classList.add('section-enter');
             
             setTimeout(() => {
-                mainContent.classList.remove('page-enter');
+                targetSection.classList.remove('section-enter');
+                // Liberar para novas navegações
+                isNavigating = false;
+                document.body.classList.remove('page-transitioning');
             }, 500);
-            
-            // Inicializar scripts específicos da página
-            initPageScripts(page);
-            
-            // Atualizar links ativos
-            updateActiveLinks(page);
-            
-            // Rolar para o topo com animação
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-        } catch (error) {
-            console.error('Erro ao carregar conteúdo:', error);
-            mainContent.innerHTML = `
-                <div class="error-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h2>Não foi possível carregar o conteúdo</h2>
-                    <p>${error.message}</p>
-                    <button class="retry-btn" data-page="${page}">Tentar novamente</button>
-                    <button class="home-btn" data-page="home">Voltar para Home</button>
-                </div>
-            `;
-            
-            // Adiciona evento ao botão de retry
-            const retryBtn = mainContent.querySelector('.retry-btn');
-            if (retryBtn) {
-                retryBtn.addEventListener('click', function() {
-                    loadContent(this.getAttribute('data-page'));
-                });
-            }
-            
-            // Adiciona evento ao botão de voltar para home
-            const homeBtn = mainContent.querySelector('.home-btn');
-            if (homeBtn) {
-                homeBtn.addEventListener('click', function() {
-                    loadContent('home');
-                });
-            }
+        } else {
+            console.error(`Seção #${sectionId} não encontrada`);
+            isNavigating = false;
+            document.body.classList.remove('page-transitioning');
         }
+        
+        // Atualizar links ativos
+        updateActiveLinks(sectionId);
+        
+        // Rolar para o topo suavemente
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Inicializar scripts específicos da página/seção
+        initSectionScripts(sectionId);
     }
     
-    // Atualiza a classe active nos links de navegação
-    function updateActiveLinks(page) {
+    // Atualizar links ativos no menu
+    function updateActiveLinks(sectionId) {
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('data-page') === page) {
+            if (link.getAttribute('data-page') === sectionId) {
                 link.classList.add('active');
             }
         });
     }
     
-    // Inicializa os scripts específicos de cada página
-    function initPageScripts(page) {
-        if (page === 'calculator') {
-            initCalculator();
-        } else if (page === 'tables') {
-            initTables();
+    // Inicializar os scripts específicos de cada seção - Versão melhorada
+    function initSectionScripts(sectionId) {
+        console.log(`Inicializando scripts para: ${sectionId}`);
+        
+        // Desativar elementos de animação anteriores para evitar conflitos
+        const oldAnimatedElements = document.querySelectorAll('.animate-running');
+        oldAnimatedElements.forEach(el => {
+            el.classList.remove('animate-running');
+        });
+        
+        // Inicializar funcionalidades específicas de cada seção
+        switch(sectionId) {
+            case 'calculator':
+                initCalculator();
+                break;
+            case 'tables':
+                initTables();
+                break;
+            case 'home':
+                initHomePage();
+                break;
+            case 'about':
+            case 'tips':
+                // Inicialização específica para outras páginas se necessário
+                break;
         }
         
-        // Reinicializa efeitos de animação
-        setTimeout(() => {
-            initAnimations();
-        }, 100);
+        // Reinicializar animações para a seção atual
+        initAnimations();
         
-        // Adiciona efeito de ripple nos botões
+        // Adicionar eventos aos links dentro da seção
+        addNavEvents();
+        
+        // Adicionar efeito de ripple nos botões
         addRippleEffect();
         
-        // Adiciona eventos aos links dentro do conteúdo
-        addNavEvents();
-    }
-    
-    // Adiciona evento de clique nos links de navegação dentro do conteúdo carregado
-    function addNavEvents() {
-        const contentNavLinks = mainContent.querySelectorAll('.nav-link');
-        contentNavLinks.forEach(link => {
-            if (!link.hasNavEvent) {
-                link.hasNavEvent = true;
-                link.addEventListener('click', handleNavClick);
-            }
+        // Marcar elementos de animação na seção atual
+        const newAnimatedElements = document.querySelectorAll('.animate-on-scroll');
+        newAnimatedElements.forEach(el => {
+            el.classList.add('animate-running');
         });
     }
     
-    // Inicializa a página inicial
-    function initHomePage() {
-        // Quick calculator functionality
-        const quickDistance = document.getElementById('quick-distance');
-        const quickMinutes = document.getElementById('quick-minutes');
-        const quickSeconds = document.getElementById('quick-seconds');
-        const quickCalculateBtn = document.getElementById('quick-calculate-btn');
-        const quickResult = document.getElementById('quick-result');
-        const quickPaceResult = document.getElementById('quick-pace-result');
-        
-        if (quickCalculateBtn) {
-            quickCalculateBtn.addEventListener('click', function() {
-                const distance = parseFloat(quickDistance.value) || 0;
-                const minutes = parseInt(quickMinutes.value) || 0;
-                const seconds = parseInt(quickSeconds.value) || 0;
-                
-                if (distance <= 0) {
-                    showAlert('Por favor, informe uma distância válida.');
-                    return;
-                }
-                
-                if (minutes === 0 && seconds === 0) {
-                    showAlert('Por favor, informe um tempo válido.');
-                    return;
-                }
-                
-                const totalSeconds = (minutes * 60) + seconds;
-                const paceSeconds = totalSeconds / distance;
-                const paceMinutes = Math.floor(paceSeconds / 60);
-                const paceRemainingSeconds = Math.round(paceSeconds % 60);
-                
-                const formattedPace = `${paceMinutes}:${paceRemainingSeconds.toString().padStart(2, '0')}`;
-                
-                quickPaceResult.textContent = formattedPace;
-                
-                // Anima a exibição do resultado
-                if (quickResult.style.display === 'none' || quickResult.style.display === '') {
-                    quickResult.style.display = 'block';
-                    quickResult.classList.add('result-reveal');
-                    
-                    setTimeout(() => {
-                        quickResult.classList.remove('result-reveal');
-                    }, 1000);
-                } else {
-                    quickResult.classList.add('result-update');
-                    
-                    setTimeout(() => {
-                        quickResult.classList.remove('result-update');
-                    }, 500);
-                }
-            });
-        }
-        
-        // Inicializa animações
-        initAnimations();
-        
-        // Adiciona efeito de ripple
-        addRippleEffect();
-        
-        // Adiciona eventos aos links
-        addNavEvents();
-    }
-    
-    // Inicializa as animações
-    function initAnimations() {
-        const animateElements = document.querySelectorAll('.animate-on-scroll');
-        
-        function checkScroll() {
-            animateElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const triggerPoint = window.innerHeight * 0.8;
-                
-                if (elementTop < triggerPoint) {
-                    element.classList.add('show');
-                }
-            });
-        }
-        
-        // Executa uma vez no início
-        setTimeout(checkScroll, 100);
-        
-        // Adiciona evento de scroll
-        window.addEventListener('scroll', checkScroll);
-    }
-    
-    // Atualiza a URL e carrega o conteúdo
-    function navigateTo(page) {
-        window.location.hash = page === 'home' ? '/' : `/${page}`;
-        loadContent(page);
-    }
-    
-    // Handler para cliques nos links de navegação - Atualizado para SPA
+    // Handler para clique nos links de navegação - com proteção contra múltiplos cliques
     function handleNavClick(e) {
         e.preventDefault();
-        const page = this.getAttribute('data-page');
+        
+        // Se já houver uma navegação em andamento, ignorar o clique
+        if (isNavigating) return;
+        
+        // Obter o ID da seção alvo do atributo data-page
+        const targetPage = this.getAttribute('data-page');
         
         // Efeito de ripple
         const ripple = document.createElement('span');
@@ -307,38 +142,48 @@ document.addEventListener('DOMContentLoaded', function() {
             ripple.remove();
         }, 600);
         
-        // Atualizar a URL sem recarregar a página
-        window.history.pushState({ page: page }, '', page === 'home' ? '/' : `#/${page}`);
+        // Atualizar a URL com o hash sem recarregar a página
+        window.history.pushState({ page: targetPage }, '', `#${targetPage}`);
         
-        // Carregar o conteúdo
-        loadContent(page);
+        // Mostrar a seção correspondente
+        showSection(targetPage);
     }
     
-    // Inicialização
+    // Adicionar evento de clique aos links de navegação
+    navLinks.forEach(link => {
+        link.addEventListener('click', handleNavClick);
+    });
+    
+    // Adicionar evento de clique aos links dentro do conteúdo
+    function addNavEvents() {
+        const contentNavLinks = document.querySelectorAll('.content-section a.nav-link');
+        contentNavLinks.forEach(link => {
+            if (!link.hasNavEvent) {
+                link.hasNavEvent = true;
+                link.addEventListener('click', handleNavClick);
+            }
+        });
+    }
+    
+    // Inicialização da página
     function init() {
         console.log('Inicializando aplicação...');
         
-        // Preservar o conteúdo inicial em vez de convertê-lo em partial
-        // Deixar o conteúdo inicial como está para garantir que ao menos a home funcione
-        
-        // Determinar a página inicial com base na URL
-        let page = 'home';
+        // Determinar a seção inicial com base no hash da URL
         const hash = window.location.hash;
+        let initialPage = 'home'; // Default para home
         
-        if (hash && hash !== '#/' && hash !== '#') {
-            page = hash.replace('#/', '');
+        if (hash && hash !== '#') {
+            initialPage = hash.replace('#', '');
         }
         
-        console.log(`Página inicial: ${page}`);
+        console.log(`Seção inicial: ${initialPage}`);
         
-        // Carregar a página inicial
-        loadContent(page);
+        // Mostrar a seção inicial
+        showSection(initialPage);
     }
     
-    // Iniciar o SPA
-    init();
-    
-    // Adicionar suporte ao botão voltar/avançar do navegador
+    // Suporte ao botão voltar/avançar do navegador
     window.addEventListener('popstate', function(e) {
         let page = 'home';
         
@@ -346,13 +191,16 @@ document.addEventListener('DOMContentLoaded', function() {
             page = e.state.page;
         } else {
             const hash = window.location.hash;
-            if (hash && hash !== '#/' && hash !== '#') {
-                page = hash.replace('#/', '');
+            if (hash && hash !== '#') {
+                page = hash.replace('#', '');
             }
         }
         
-        loadContent(page);
+        showSection(page);
     });
+    
+    // Inicializar a página
+    init();
     
     // Theme switcher with improved animation
     const themeSwitch = document.getElementById('theme-switch');
@@ -455,6 +303,82 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+    }
+    
+    // Inicializar animações de scroll
+    function initAnimations() {
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const triggerPoint = window.innerHeight * 0.8;
+                
+                if (elementTop < triggerPoint) {
+                    element.classList.add('show');
+                }
+            });
+        }
+        
+        // Executa uma vez no início
+        setTimeout(checkScroll, 100);
+        
+        // Adiciona evento de scroll
+        window.addEventListener('scroll', checkScroll);
+    }
+    
+    // Inicialização da homepage
+    function initHomePage() {
+        // Quick calculator functionality
+        const quickDistance = document.getElementById('quick-distance');
+        const quickMinutes = document.getElementById('quick-minutes');
+        const quickSeconds = document.getElementById('quick-seconds');
+        const quickCalculateBtn = document.getElementById('quick-calculate-btn');
+        const quickResult = document.getElementById('quick-result');
+        const quickPaceResult = document.getElementById('quick-pace-result');
+        
+        if (quickCalculateBtn) {
+            quickCalculateBtn.addEventListener('click', function() {
+                const distance = parseFloat(quickDistance.value) || 0;
+                const minutes = parseInt(quickMinutes.value) || 0;
+                const seconds = parseInt(quickSeconds.value) || 0;
+                
+                if (distance <= 0) {
+                    showAlert('Por favor, informe uma distância válida.');
+                    return;
+                }
+                
+                if (minutes === 0 && seconds === 0) {
+                    showAlert('Por favor, informe um tempo válido.');
+                    return;
+                }
+                
+                const totalSeconds = (minutes * 60) + seconds;
+                const paceSeconds = totalSeconds / distance;
+                const paceMinutes = Math.floor(paceSeconds / 60);
+                const paceRemainingSeconds = Math.round(paceSeconds % 60);
+                
+                const formattedPace = `${paceMinutes}:${paceRemainingSeconds.toString().padStart(2, '0')}`;
+                
+                quickPaceResult.textContent = formattedPace;
+                
+                // Anima a exibição do resultado
+                if (quickResult.style.display === 'none' || quickResult.style.display === '') {
+                    quickResult.style.display = 'block';
+                    quickResult.classList.add('result-reveal');
+                    
+                    setTimeout(() => {
+                        quickResult.classList.remove('result-reveal');
+                    }, 1000);
+                } else {
+                    quickResult.classList.add('result-update');
+                    
+                    setTimeout(() => {
+                        quickResult.classList.remove('result-update');
+                    }, 500);
+                }
+            });
+        }
     }
     
     // Inicialização da calculadora
@@ -608,51 +532,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 1000);
             });
         }
-        
-        function showAlert(message) {
-            // Criar alerta customizado
-            const alertBox = document.createElement('div');
-            alertBox.classList.add('custom-alert');
-            alertBox.innerHTML = `
-                <div class="alert-content">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <p>${message}</p>
-                    <button class="alert-close"><i class="fas fa-times"></i></button>
-                </div>
-            `;
-            
-            document.body.appendChild(alertBox);
-            
-            // Animação de entrada
-            setTimeout(() => {
-                alertBox.classList.add('show');
-            }, 10);
-            
-            // Fechar ao clicar no botão
-            const closeBtn = alertBox.querySelector('.alert-close');
-            closeBtn.addEventListener('click', () => {
-                alertBox.classList.remove('show');
-                
-                // Remover do DOM após animação
-                setTimeout(() => {
-                    document.body.removeChild(alertBox);
-                }, 300);
-            });
-            
-            // Auto fechar após 4 segundos
-            setTimeout(() => {
-                if (document.body.contains(alertBox)) {
-                    alertBox.classList.remove('show');
-                    
-                    // Remover do DOM após animação
-                    setTimeout(() => {
-                        if (document.body.contains(alertBox)) {
-                            document.body.removeChild(alertBox);
-                        }
-                    }, 300);
-                }
-            }, 4000);
-        }
     }
     
     // Inicialização das tabelas
@@ -661,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const paceTableBody = document.getElementById('pace-table-body');
         
-        if (paceTableBody) {
+        if (paceTableBody && paceTableBody.innerHTML.trim() === '') {
             generatePaceTable();
         }
         
@@ -726,57 +605,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Quick calculator functionality on homepage
-    const quickDistance = document.getElementById('quick-distance');
-    const quickMinutes = document.getElementById('quick-minutes');
-    const quickSeconds = document.getElementById('quick-seconds');
-    const quickCalculateBtn = document.getElementById('quick-calculate-btn');
-    const quickResult = document.getElementById('quick-result');
-    const quickPaceResult = document.getElementById('quick-pace-result');
-    
-    if (quickCalculateBtn) {
-        quickCalculateBtn.addEventListener('click', function() {
-            const distance = parseFloat(quickDistance.value) || 0;
-            const minutes = parseInt(quickMinutes.value) || 0;
-            const seconds = parseInt(quickSeconds.value) || 0;
-            
-            if (distance <= 0) {
-                showAlert('Por favor, informe uma distância válida.');
-                return;
-            }
-            
-            if (minutes === 0 && seconds === 0) {
-                showAlert('Por favor, informe um tempo válido.');
-                return;
-            }
-            
-            const totalSeconds = (minutes * 60) + seconds;
-            const paceSeconds = totalSeconds / distance;
-            const paceMinutes = Math.floor(paceSeconds / 60);
-            const paceRemainingSeconds = Math.round(paceSeconds % 60);
-            
-            const formattedPace = `${paceMinutes}:${paceRemainingSeconds.toString().padStart(2, '0')}`;
-            
-            quickPaceResult.textContent = formattedPace;
-            
-            // Anima a exibição do resultado
-            if (quickResult.style.display === 'none' || quickResult.style.display === '') {
-                quickResult.style.display = 'block';
-                quickResult.classList.add('result-reveal');
-                
-                setTimeout(() => {
-                    quickResult.classList.remove('result-reveal');
-                }, 1000);
-            } else {
-                quickResult.classList.add('result-update');
-                
-                setTimeout(() => {
-                    quickResult.classList.remove('result-update');
-                }, 500);
-            }
-        });
-    }
-    
     // Helper function to show alerts
     function showAlert(message) {
         // Criar alerta customizado
@@ -825,4 +653,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicialização global
     addRippleEffect();
+    initAnimations();
 });
