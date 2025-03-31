@@ -53,7 +53,7 @@
     <!-- Main Content -->
     <div id="main-content" class="page-content active">
         <!-- Conteúdo inicial (Home) -->
-        <div id="home-content">
+        <div id="home-content" class="compact-home">
             <header class="hero">
                 <div class="container hero-content">
                     <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
@@ -124,35 +124,44 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer - Redesigned -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
                     <h2><span class="highlight">Lazz</span>Pace</h2>
-                    <p>Sua ferramenta de cálculo de pace</p>
+                    <p>Sua ferramenta completa para cálculo e análise de ritmo de corrida, desenvolvida para corredores de todos os níveis.</p>
+                    <p class="footer-tagline">Corra mais inteligente, não apenas mais rápido.</p>
                 </div>
                 <div class="footer-links">
                     <h3>Links Rápidos</h3>
                     <ul>
-                        <li><a href="#/calculator" data-page="calculator" class="nav-link">Calculadora</a></li>
-                        <li><a href="#/tables" data-page="tables" class="nav-link">Tabelas</a></li>
-                        <li><a href="#/about" data-page="about" class="nav-link">Sobre Pace</a></li>
-                        <li><a href="#/tips" data-page="tips" class="nav-link">Dicas</a></li>
+                        <li><a href="#/calculator" data-page="calculator" class="nav-link">Calculadora de Pace</a></li>
+                        <li><a href="#/tables" data-page="tables" class="nav-link">Tabelas de Referência</a></li>
+                        <li><a href="#/about" data-page="about" class="nav-link">Sobre o Pace</a></li>
+                        <li><a href="#/tips" data-page="tips" class="nav-link">Dicas de Treinamento</a></li>
                     </ul>
                 </div>
                 <div class="social-links">
-                    <h3>Siga-nos</h3>
+                    <h3>Conecte-se</h3>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-strava"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Strava"><i class="fab fa-strava"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
+                    <p class="newsletter-cta">Receba dicas e novidades sobre corrida:</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; <?php echo date('Y') ?> LazzPace - Calculadora de Pace para Corredores</p>
+                <p>&copy; <?php echo date('Y'); ?> LazzPace - Todos os direitos reservados</p>
+                <p class="footer-credits">Desenvolvido com <i class="fas fa-heart"></i> para corredores</p>
             </div>
         </div>
     </footer>

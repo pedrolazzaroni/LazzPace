@@ -19,85 +19,115 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 50);
     }
 
-    // SPA Navigation
+    // SPA Navigation - Improved version
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.nav-link');
     
     // Carrega o conteúdo das páginas dinamicamente
     async function loadContent(page) {
-        // Se estamos na página inicial e já está carregada, apenas atualize as classes
-        if (page === 'home') {
-            // Adiciona efeito de saída
-            mainContent.classList.add('page-exit');
-            
-            // Aguarda a animação de saída
-            await new Promise(resolve => setTimeout(resolve, 300));
-            
-            mainContent.innerHTML = document.getElementById('home-content').outerHTML;
-            
-            // Adiciona efeito de entrada
-            mainContent.classList.remove('page-exit');
-            mainContent.classList.add('page-enter');
-            
-            // Remove a classe após a animação
-            setTimeout(() => {
-                mainContent.classList.remove('page-enter');
-            }, 600);
-            
-            initHomePage();
-            updateActiveLinks(page);
-            return;
-        }
-        
-        // Adiciona efeito de saída ao conteúdo atual com backdrop filter
-        document.body.classList.add('page-transitioning');
-        mainContent.classList.add('page-exit');
-        
-        // Aguarda a animação de saída
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
         try {
-            // Mostra indicador de carregamento com animação
-            mainContent.innerHTML = `
-                <div class="loading-container">
-                    <div class="loading-spinner"></div>
-                    <p class="loading-text">Carregando<span class="dot-animation">.</span><span class="dot-animation">.</span><span class="dot-animation">.</span></p>
-                </div>
-            `;
-            
-            // Anima os pontos
-            const dots = document.querySelectorAll('.dot-animation');
-            dots.forEach((dot, index) => {
-                dot.style.animation = `dotFade 1.5s ${index * 0.2}s infinite`;
-            });
-            
-            // Carrega o conteúdo do partial
-            const response = await fetch(`partials/${page}.html`);
-            if (!response.ok) {
-                throw new Error(`Falha ao carregar o conteúdo da página ${page}.`);
+            // Se estamos na página inicial, apenas mostre o conteúdo já presente
+            if (page === 'home') {
+                // Adicionar efeito de transição
+                mainContent.classList.add('page-exit');
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Ocultar todos os partials
+                document.querySelectorAll('.page-partial').forEach(partial => {
+                    partial.style.display = 'none';
+                });
+                
+                // Mostrar o partial da home
+                const homePartial = document.getElementById('home-partial');
+                if (homePartial) {
+                    homePartial.style.display = 'block';
+                }
+                
+                mainContent.classList.remove('page-exit');
+                mainContent.classList.add('page-enter');
+                
+                setTimeout(() => {
+                    mainContent.classList.remove('page-enter');
+                }, 500);
+                
+                updateActiveLinks(page);
+                return;
             }
             
-            // Simula um pequeno delay para uma experiência mais suave
+            // Adicionar efeito de transição
+            mainContent.classList.add('page-exit');
+            
             await new Promise(resolve => setTimeout(resolve, 300));
             
-            // Adiciona o conteúdo no container principal
-            const content = await response.text();
-            mainContent.innerHTML = content;
+            // Verificar se o partial já está carregado
+            let partial = document.getElementById(`${page}-partial`);
             
-            // Atualiza as classes para animar a entrada com efeito avançado
+            if (!partial) {
+                // Mostrar loader
+                mainContent.innerHTML = `
+                    <div class="loading-container">
+                        <div class="loading-spinner"></div>
+                        <p class="loading-text">Carregando<span class="dot-animation">.</span><span class="dot-animation">.</span><span class="dot-animation">.</span></p>
+                    </div>
+                `;
+                
+                // Animar os pontos
+                const dots = document.querySelectorAll('.dot-animation');
+                dots.forEach((dot, index) => {
+                    dot.style.animation = `dotFade 1.5s ${index * 0.2}s infinite`;
+                });
+                
+                // Carregar o conteúdo do partial do servidor
+                const response = await fetch(`partials/${page}.html`);
+                if (!response.ok) {
+                    throw new Error(`Falha ao carregar o conteúdo da página ${page}.`);
+                }
+                
+                // Simular um pequeno delay para uma experiência mais suave
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Criar o elemento do partial
+                const content = await response.text();
+                const tempContainer = document.createElement('div');
+                tempContainer.innerHTML = content;
+                
+                // Ocultar todos os partials existentes
+                document.querySelectorAll('.page-partial').forEach(p => {
+                    p.style.display = 'none';
+                });
+                
+                // Criar o novo partial e adicioná-lo ao DOM
+                partial = document.createElement('div');
+                partial.id = `${page}-partial`;
+                partial.className = 'page-partial';
+                partial.innerHTML = content;
+                mainContent.appendChild(partial);
+            } else {
+                // Se o partial já existe, apenas mostre-o e oculte os outros
+                document.querySelectorAll('.page-partial').forEach(p => {
+                    p.style.display = 'none';
+                });
+                partial.style.display = 'block';
+            }
+            
+            // Animar a entrada do conteúdo
             mainContent.classList.remove('page-exit');
             mainContent.classList.add('page-enter');
             
-            // Remove a classe de transição do body
-            document.body.classList.remove('page-transitioning');
-            
-            // Remove a classe após a animação
             setTimeout(() => {
                 mainContent.classList.remove('page-enter');
-            }, 600);
+            }, 500);
             
-            // Inicializa os scripts específicos da página
+            // Inicializar scripts específicos da página
             initPageScripts(page);
+            
+            // Atualizar links ativos
+            updateActiveLinks(page);
+            
+            // Rolar para o topo com animação
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
         } catch (error) {
             console.error('Erro ao carregar conteúdo:', error);
             mainContent.innerHTML = `
@@ -116,16 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadContent(this.getAttribute('data-page'));
                 });
             }
-            
-            // Remove a classe de transição do body
-            document.body.classList.remove('page-transitioning');
         }
-        
-        // Atualiza os links ativos
-        updateActiveLinks(page);
-        
-        // Rola para o topo com animação
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
     // Atualiza a classe active nos links de navegação
@@ -260,46 +281,69 @@ document.addEventListener('DOMContentLoaded', function() {
         loadContent(page);
     }
     
-    // Handler para cliques nos links de navegação
+    // Handler para cliques nos links de navegação - Atualizado para SPA
     function handleNavClick(e) {
         e.preventDefault();
         const page = this.getAttribute('data-page');
         
-        // Adiciona efeito de ripple ao link
+        // Efeito de ripple
         const ripple = document.createElement('span');
         ripple.classList.add('nav-link-ripple');
         this.appendChild(ripple);
         
-        // Remove o ripple após a animação
         setTimeout(() => {
             ripple.remove();
         }, 600);
         
-        navigateTo(page);
-    }
-    
-    // Adiciona evento de clique em todos os links de navegação
-    navLinks.forEach(link => {
-        link.addEventListener('click', handleNavClick);
-    });
-    
-    // Manipula o carregamento inicial e a navegação pelo histórico
-    function handleRoute() {
-        let page = 'home';
-        const hash = window.location.hash.replace('#', '');
+        // Atualizar a URL sem recarregar a página
+        window.history.pushState({ page: page }, '', page === 'home' ? '/' : `#/${page}`);
         
-        if (hash && hash !== '/') {
-            page = hash.replace('/', '');
-        }
-        
+        // Carregar o conteúdo
         loadContent(page);
     }
     
-    // Manipula navegação pelo histórico do navegador
-    window.addEventListener('hashchange', handleRoute);
+    // Inicialização
+    function init() {
+        // Converter o conteúdo inicial em um partial
+        const initialContent = mainContent.innerHTML;
+        mainContent.innerHTML = '';
+        
+        const homePartial = document.createElement('div');
+        homePartial.id = 'home-partial';
+        homePartial.className = 'page-partial';
+        homePartial.innerHTML = initialContent;
+        mainContent.appendChild(homePartial);
+        
+        // Determinar a página inicial com base na URL
+        let page = 'home';
+        const hash = window.location.hash;
+        
+        if (hash && hash !== '#/' && hash !== '#') {
+            page = hash.replace('#/', '');
+        }
+        
+        // Carregar a página inicial
+        loadContent(page);
+    }
     
-    // Carregamento inicial da rota
-    handleRoute();
+    // Iniciar o SPA
+    init();
+    
+    // Adicionar suporte ao botão voltar/avançar do navegador
+    window.addEventListener('popstate', function(e) {
+        let page = 'home';
+        
+        if (e.state && e.state.page) {
+            page = e.state.page;
+        } else {
+            const hash = window.location.hash;
+            if (hash && hash !== '#/' && hash !== '#') {
+                page = hash.replace('#/', '');
+            }
+        }
+        
+        loadContent(page);
+    });
     
     // Theme switcher with improved animation
     const themeSwitch = document.getElementById('theme-switch');
