@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isNavigating) return;
         isNavigating = true;
         
-        // Adicionar classe de transição ao corpo
         document.body.classList.add('page-transitioning');
         
         // Ocultar todas as seções
