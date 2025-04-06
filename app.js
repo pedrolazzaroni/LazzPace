@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function showSection(sectionId) {
         console.log(`Navegando para: ${sectionId}`);
         
-        // Se já houver uma navegação em andamento, ignorar
         if (isNavigating) return;
         isNavigating = true;
         
