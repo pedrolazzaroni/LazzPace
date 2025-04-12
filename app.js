@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variável global para controlar se uma navegação está em andamento
     let isNavigating = false;
     
-    // Nova função para mostrar/ocultar seções de conteúdo - Versão corrigida
     function showSection(sectionId) {
         console.log(`Navegando para: ${sectionId}`);
         
