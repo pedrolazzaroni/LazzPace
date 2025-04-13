@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.classList.add('page-transitioning');
         
-        // Ocultar todas as seções
         contentSections.forEach(section => {
             section.classList.remove('active');
         });
