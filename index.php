@@ -54,6 +54,12 @@
     <div id="main-content" class="page-content">
         <!-- HOME PAGE -->
         <div id="home" class="content-section active">
+            <header class="page-header home-header">
+                <div class="container">
+                    <h1>Bem-vindo ao LazzPace</h1>
+                    <p>Sua ferramenta completa para cálculo e controle do ritmo de corrida</p>
+                </div>
+            </header>
 
             <main class="container">
                 <section class="quick-calc animate-on-scroll">
