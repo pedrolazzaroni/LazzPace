@@ -54,12 +54,6 @@
     <div id="main-content" class="page-content">
         <!-- HOME PAGE -->
         <div id="home" class="content-section active">
-            <header class="hero">
-                <div class="container hero-content">
-                    <p class="fade-in hero-tagline">Calcule e entenda o seu ritmo de corrida</p>
-                    <a href="#calculator" data-page="calculator" class="btn btn-primary btn-pulse nav-link">Calculadora completa</a>
-                </div>
-            </header>
 
             <main class="container">
                 <section class="quick-calc animate-on-scroll">
