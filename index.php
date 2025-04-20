@@ -52,6 +52,7 @@
 
     <!-- Main Content -->
     <div id="main-content" class="page-content">
+    
         <!-- HOME PAGE -->
         <div id="home" class="content-section active">
             <header class="page-header home-header">
