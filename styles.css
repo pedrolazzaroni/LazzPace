@@ -165,20 +165,9 @@ body {
 }
 
 .nav-links a.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(-100%);
-    animation: activeShimmer 2s infinite;
-}
-
-@keyframes activeShimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    display: none !important;
+    content: none !important;
+    animation: none !important;
 }
 
 .menu-toggle {
@@ -1858,3 +1847,20 @@ copyright p {
 }
 
 /* ====== FIM DOS ESTILOS DE additional-styles.css ====== */
+
+/* Sticky footer layout para evitar espaço em branco */
+html, body {
+    height: 100%;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#main-content, .page-content {
+    flex: 1 0 auto;
+    min-height: 0 !important;
+}
+footer {
+    flex-shrink: 0;
+}
