@@ -51,7 +51,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div id="main-content" class="page-content">
+    <div id="main-content" class="page-content" style="min-height: calc(100vh - 320px);">
         <!-- HOME PAGE -->
         <div id="home" class="content-section active">
             <header class="page-header home-header">
@@ -60,7 +60,6 @@
                     <p>Sua ferramenta completa para cálculo e controle do ritmo de corrida</p>
                 </div>
             </header>
-
             <main class="container">
                 <section class="quick-calc animate-on-scroll">
                     <div class="card">
@@ -635,7 +634,7 @@
     </div>
 
     <!-- Footer - Redesigned -->
-    <footer>
+    <footer style="margin-top:0;">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">

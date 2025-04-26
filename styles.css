@@ -1460,3 +1460,401 @@ footer::before {
 copyright p {
     margin: 0;
 }
+
+/* ====== INÍCIO DOS ESTILOS DE additional-styles.css ====== */
+
+/* Efeito de Glassmorphism para alguns elementos */
+.glass-card {
+    background: rgba(var(--bg-dark-rgb), 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--primary), 0.1);
+}
+
+/* Estilo para código e fórmulas matemáticas */
+.code-block {
+    font-family: 'Consolas', monospace;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin: 15px 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--primary);
+}
+
+.dark-theme .code-block {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Botões com ícones */
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.icon-btn i {
+    font-size: 1.1rem;
+}
+
+/* Estilos para tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted var(--primary);
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    text-align: center;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para badges */
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.badge-primary {
+    background-color: var(--primary);
+    color: var(--bg-light);
+}
+
+.badge-secondary {
+    background-color: rgba(var(--bg-dark-rgb), 0.1);
+    color: var(--primary);
+}
+
+.dark-theme .badge-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Barra de progresso estilizada */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(var(--bg-dark-rgb), 0.1);
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.dark-theme .progress-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* Animação de typing para textos */
+.typewriter h1 {
+    overflow: hidden;
+    border-right: .15em solid var(--primary);
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary) }
+}
+
+/* Efeito de hover em cards com zoom suave */
+.zoom-card {
+    transition: transform 0.3s ease;
+}
+
+.zoom-card:hover {
+    transform: scale(1.03);
+}
+
+/* Botão de scroll to top */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary);
+    color: var(--bg-light);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-top.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-5px);
+}
+
+/* Estilos para dark theme */
+.dark-theme {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) #000000;
+}
+
+.dark-theme ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 6px;
+    border: 3px solid #000000;
+}
+
+/* Theme switch responsividade */
+@media (max-width: 768px) {
+    .theme-switch-wrapper {
+        position: absolute;
+        top: 15px;
+        right: 70px;
+    }
+    
+    .nav-links .theme-switch-wrapper {
+        position: static;
+        margin: 15px 0;
+    }
+}
+
+/* Estilos adicionais para o Footer */
+.footer-tagline {
+    font-style: italic;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.newsletter-cta {
+    margin: 20px 0 10px;
+    color: var(--text-light);
+}
+
+.newsletter-form {
+    display: flex;
+    margin-top: 10px;
+    max-width: 300px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px 0 0 4px;
+    color: var(--light-text);
+    font-family: inherit;
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.newsletter-form button {
+    padding: 10px 15px;
+    background: var(--primary);
+    color: var(--light-text);
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: var(--primary-dark);
+    transform: translateX(0);
+}
+
+.footer-credits {
+    margin-top: 10px;
+    font-size: 0.85rem;
+}
+
+.footer-credits i {
+    color: #ff6b6b;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.3); }
+    60% { transform: scale(1); }
+}
+
+/* Estilo para partials SPA */
+.page-partial {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Otimizações de performance para transições */
+.preloader {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.result-reveal {
+    animation: resultReveal 0.3s forwards;
+}
+
+@keyframes resultReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-content.page-exit,
+.page-content.page-enter,
+.animate-on-scroll,
+.btn-pulse,
+.card-link {
+    will-change: transform, opacity;
+}
+
+.scroll-to-top {
+    transform: translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.scroll-to-top.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilo melhorado para o Hero Header */
+.hero {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* REMOVER efeito do quadrado branco transparente do header (hero) */
+.hero::before {
+    display: none !important;
+}
+
+/* Melhorar botões do header e da view */
+.nav-link, .card-link, .btn, .btn-pulse, .primary-btn, .secondary-btn {
+    border-radius: 30px;
+    font-weight: 600;
+    padding: 10px 24px;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: none;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: var(--primary);
+    color: #fff;
+}
+
+.nav-link:hover, .card-link:hover, .btn:hover, .btn-pulse:hover, .primary-btn:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.secondary-btn {
+    background: var(--secondary);
+    color: #fff;
+}
+
+.secondary-btn:hover {
+    background: var(--secondary-dark);
+    color: #fff;
+}
+
+.page-header .nav-link, .page-header .btn, .page-header .btn-pulse, .page-header .primary-btn, .page-header .secondary-btn {
+    margin-top: 18px;
+    margin-bottom: 0;
+}
+
+.btn-primary.btn-pulse, .primary-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+}
+
+.btn-primary.btn-pulse:hover, .primary-btn:hover {
+    background: var(--primary-dark);
+    color: #fff;
+}
+
+/* ====== FIM DOS ESTILOS DE additional-styles.css ====== */
