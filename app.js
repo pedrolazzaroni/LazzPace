@@ -23,22 +23,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function loadPage(page) {
         if (!mainContent) return;
-        if (currentPage === page) return;
+        if (currentPage === page && mainContent.innerHTML.trim() !== '') return;
         currentPage = page;
-        mainContent.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><p class="loading-text">Carregando...</p></div>';
-        try {
-            let partialPath = `partials/${page}.html`;
-            const response = await fetch(partialPath);
-            if (!response.ok) throw new Error('Conteúdo não encontrado.');
-            const html = await response.text();
-            mainContent.innerHTML = html;
-            // Inicializar scripts específicos da página
-            initSectionScripts(page);
-        } catch (e) {
-            mainContent.innerHTML = `<div class="error-message"><h2>Não foi possível carregar o conteúdo</h2><p>${e.message}</p></div>`;
-        }
-        updateActiveLinks(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        mainContent.classList.add('spa-exit');
+        setTimeout(async () => {
+            mainContent.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><p class="loading-text">Carregando...</p></div>';
+            try {
+                let partialPath = `partials/${page}.html`;
+                const response = await fetch(partialPath);
+                if (!response.ok) throw new Error('Conteúdo não encontrado.');
+                const html = await response.text();
+                mainContent.innerHTML = html;
+                mainContent.classList.remove('spa-exit');
+                mainContent.classList.add('spa-enter');
+                setTimeout(() => mainContent.classList.remove('spa-enter'), 600);
+                initSectionScripts(page);
+            } catch (e) {
+                mainContent.innerHTML = `<div class="error-message"><h2>Não foi possível carregar o conteúdo</h2><p>${e.message}</p></div>`;
+                mainContent.classList.remove('spa-exit');
+            }
+            updateActiveLinks(page);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 250);
     }
 
     function updateActiveLinks(page) {
