@@ -1918,3 +1918,230 @@ copyright p {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 }
+
+/* --- Tabelas de Referência --- */
+.tables-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.tables-card, .reference-card {
+    flex: 1 1 420px;
+    min-width: 340px;
+    max-width: 650px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 32px 28px 28px 28px;
+    border: 1.5px solid var(--primary);
+    transition: box-shadow 0.2s, border 0.2s;
+}
+.tables-card:hover, .reference-card:hover {
+    box-shadow: 0 8px 32px rgba(250, 107, 13, 0.10);
+    border-color: var(--primary-dark);
+}
+
+.card-description {
+    color: var(--text-light);
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+.table-filters {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.filter-btn {
+    background: var(--primary);
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(250, 107, 13, 0.10);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+.filter-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 6px 18px rgba(250, 107, 13, 0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* --- Tabelas --- */
+.styled-table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-top: 1.2rem;
+    box-sizing: border-box;
+}
+.styled-table {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(250, 107, 13, 0.04);
+}
+.styled-table th, .styled-table td {
+    padding: 14px 18px;
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.styled-table th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border: none;
+}
+.styled-table tr:last-child td {
+    border-bottom: none;
+}
+.styled-table tbody tr {
+    transition: box-shadow 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.styled-table tbody tr:hover {
+    background: rgba(var(--primary), 0.10);
+    box-shadow: 0 4px 18px rgba(250, 107, 13, 0.13);
+    z-index: 2;
+    position: relative;
+}
+@media (max-width: 700px) {
+    .styled-table {
+        min-width: 400px;
+        font-size: 0.95rem;
+    }
+    .tables-card, .reference-card {
+        padding: 18px 6px 18px 6px;
+    }
+}
+
+/* ====== ESTILOS PARA A NOVA TABELA DE RITMOS ====== */
+.pace-table-main {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding-top: 30px;
+}
+.pace-table-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1.5px solid var(--primary);
+    padding: 32px 24px 18px 24px;
+    text-align: center;
+}
+.pace-table-header h2 {
+    margin-bottom: 18px;
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.pace-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    margin-top: 8px;
+}
+.pace-input-group label {
+    font-weight: 500;
+    color: var(--text-color);
+}
+.pace-input {
+    width: 55px;
+    padding: 8px 10px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-dark);
+    background: #fff;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.pace-input:focus {
+    border: 2px solid var(--primary-dark);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(250, 107, 13, 0.13);
+}
+.pace-table-container {
+    margin-top: 0;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1.5px solid var(--primary);
+    padding: 0 0 18px 0;
+}
+.big-pace-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0;
+    font-size: 1.13rem;
+}
+.big-pace-table th, .big-pace-table td {
+    padding: 18px 18px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.big-pace-table th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.13rem;
+    border: none;
+}
+.big-pace-table tr:last-child td {
+    border-bottom: none;
+}
+.big-pace-table tbody tr {
+    transition: box-shadow 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.big-pace-table tbody tr:hover {
+    background: rgba(var(--primary), 0.10);
+    box-shadow: 0 4px 18px rgba(250, 107, 13, 0.13);
+    z-index: 2;
+    position: relative;
+}
+@media (max-width: 700px) {
+    .pace-table-main {
+        padding-top: 10px;
+    }
+    .pace-table-header, .pace-table-container {
+        padding: 14px 4px 10px 4px;
+    }
+    .big-pace-table th, .big-pace-table td {
+        padding: 12px 6px;
+        font-size: 1rem;
+    }
+    .pace-input {
+        width: 40px;
+        font-size: 1rem;
+    }
+}

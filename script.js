@@ -324,18 +324,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('equiv-full').textContent = marathon;
     }
     
-    function formatTime(totalSeconds) {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = Math.round(totalSeconds % 60);
-        
-        if (hours > 0) {
-            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        } else {
-            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        }
-    }
-    
     // Generate pace table (for tables page)
     const paceTableBody = document.getElementById('pace-table-body');
     
@@ -377,21 +365,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Tabs functionality
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabId = button.getAttribute('data-tab');
-            
-            // Remove active class from all buttons and contents
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            
-            // Add active class to selected button and content
-            button.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        });
+    // --- Script para tabela dinâmica de ritmos em tables.html ---
+function formatTime(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.round(totalSeconds % 60);
+    if (hours > 0) {
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    } else {
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+}
+function updateBigPaceTable() {
+    const minInput = document.getElementById('pace-base-min');
+    const secInput = document.getElementById('pace-base-sec');
+    const tbody = document.getElementById('big-pace-table-body');
+    if (!minInput || !secInput || !tbody) return;
+    const min = parseInt(minInput.value) || 0;
+    const sec = parseInt(secInput.value) || 0;
+    const paceInSeconds = min * 60 + sec;
+    const distances = [
+        { label: '1 km', km: 1 },
+        { label: '5 km', km: 5 },
+        { label: '10 km', km: 10 },
+        { label: 'Meia Maratona (21,097 km)', km: 21.097 },
+        { label: 'Maratona (42,195 km)', km: 42.195 }
+    ];
+    tbody.innerHTML = '';
+    distances.forEach(dist => {
+        const totalSeconds = paceInSeconds * dist.km;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${dist.label}</td><td>${formatTime(totalSeconds)}</td>`;
+        tbody.appendChild(tr);
     });
+}
+function setupBigPaceTableScript() {
+    const minInput = document.getElementById('pace-base-min');
+    const secInput = document.getElementById('pace-base-sec');
+    const calcBtn = document.getElementById('pace-calc-btn');
+    if (minInput && secInput && calcBtn) {
+        calcBtn.addEventListener('click', updateBigPaceTable);
+        // Atualiza a tabela na primeira carga
+        updateBigPaceTable();
+    }
+}
+// SPA: Executa ao carregar o partial tables
+if (window.addEventListener) {
+    document.addEventListener('partialLoaded', function(e) {
+        if (e.detail && e.detail.partial === 'tables') {
+            setTimeout(setupBigPaceTableScript, 0);
+        }
+    });
+}
+// Caso não seja SPA, executa ao carregar a página
+if (document.readyState !== 'loading') {
+    setupBigPaceTableScript();
+} else {
+    document.addEventListener('DOMContentLoaded', setupBigPaceTableScript);
+}
 });
