@@ -1913,10 +1913,6 @@ copyright p {
     border-color: var(--primary-dark);
 }
 
-.distance-card:hover .distance-info li {
-    border-left: 3px solid var(--primary-dark);
-}
-
 .distance-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
