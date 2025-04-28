@@ -1,8 +1,8 @@
 /* ================ VARIABLES ================ */
 :root {
-    --primary: #FF5252;
-    --primary-light: #ff8a00;
-    --primary-dark: #c41c00;
+    --primary: #fa6b0d;
+    --primary-light: #fa6b0d;
+    --primary-dark: #c44d00;
     --secondary: #03DAC6;
     --secondary-dark: #018786;
     --text-on-light: #333333;
@@ -38,9 +38,9 @@
 
 /* Dark Theme Variables */
 .dark-theme {
-    --primary: #FF5252;
-    --primary-light: #ff8a00;
-    --primary-dark: #c41c00;
+    --primary: #fa6b0d;
+    --primary-light: #fa6b0d;
+    --primary-dark: #c44d00;
     --secondary: #03DAC6;
     --secondary-dark: #018786;
     --text-on-light: #f0f0f0;
@@ -413,7 +413,7 @@ body {
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(250, 107, 13, 0.3);
     width: 100%;
     margin-top: 5px;
     position: relative;
@@ -422,7 +422,7 @@ body {
 
 .quick-calc .btn-pulse:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
+    box-shadow: 0 8px 20px rgba(250, 107, 13, 0.4);
 }
 
 .quick-calc .btn-pulse::after {
@@ -1266,7 +1266,7 @@ button:active, .btn:active, .card-link:active {
 @keyframes pageEntrance {
     0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(30px) scale(0.98);
         filter: blur(5px);
     }
     100% {
@@ -1713,7 +1713,7 @@ copyright p {
 }
 
 .footer-credits i {
-    color: #ff6b6b;
+    color: #fa6b0d;
     animation: heartbeat 1.5s infinite;
 }
 
