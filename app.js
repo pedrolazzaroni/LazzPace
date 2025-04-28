@@ -96,10 +96,50 @@ document.addEventListener('DOMContentLoaded', function() {
             initCalculator();
         } else if (page === 'tables' && typeof initTables === 'function') {
             initTables();
-        } else if (page === 'home' && typeof initHomePage === 'function') {
-            initHomePage();
+        } else if (page === 'home') {
+            // Corrigir cálculo rápido do pace na home
+            const quickDistance = document.getElementById('quick-distance');
+            const quickMinutes = document.getElementById('quick-minutes');
+            const quickSeconds = document.getElementById('quick-seconds');
+            const quickCalculateBtn = document.getElementById('quick-calculate-btn');
+            const quickResult = document.getElementById('quick-result');
+            const quickPaceResult = document.getElementById('quick-pace-result');
+            if (quickCalculateBtn) {
+                quickCalculateBtn.onclick = function() {
+                    const distance = parseFloat(quickDistance.value) || 0;
+                    const minutes = parseInt(quickMinutes.value) || 0;
+                    const seconds = parseInt(quickSeconds.value) || 0;
+                    if (distance <= 0) {
+                        alert('Por favor, informe uma distância válida.');
+                        return;
+                    }
+                    if (minutes === 0 && seconds === 0) {
+                        alert('Por favor, informe um tempo válido.');
+                        return;
+                    }
+                    const totalSeconds = (minutes * 60) + seconds;
+                    const paceSeconds = totalSeconds / distance;
+                    const paceMinutes = Math.floor(paceSeconds / 60);
+                    const paceRemainingSeconds = Math.round(paceSeconds % 60);
+                    const formattedPace = `${paceMinutes}:${paceRemainingSeconds.toString().padStart(2, '0')}`;
+                    quickPaceResult.textContent = formattedPace;
+                    quickResult.style.display = 'block';
+                    quickResult.classList.add('fade-in');
+                    setTimeout(() => {
+                        quickResult.classList.remove('fade-in');
+                    }, 1000);
+                };
+            }
         }
         // Adicione outros inits se necessário
+
+        // Adicionar margin-bottom nas partials para não colar no footer
+        const main = document.querySelector('#main-content > main, #main-content > .container, #main-content > section');
+        if (main) {
+            main.style.marginBottom = '40px';
+        }
+        const allSections = document.querySelectorAll('#main-content > section, #main-content > .container, #main-content > main');
+        allSections.forEach(sec => sec.style.marginBottom = '40px');
     }
 
     // Theme switcher (mantém igual)
