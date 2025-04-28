@@ -92,8 +92,129 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar scripts específicos de cada partial
     function initSectionScripts(page) {
         // Exemplo: se precisar inicializar algo específico para cada página
-        if (page === 'calculator' && typeof initCalculator === 'function') {
-            initCalculator();
+        if (page === 'calculator') {
+            // Corrigir script da calculadora
+            const calcType = document.getElementById('calc-type');
+            const timeInputs = document.getElementById('time-inputs');
+            const distanceInput = document.getElementById('distance-input');
+            const paceInputs = document.getElementById('pace-inputs');
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resultCard = document.getElementById('result-card');
+            if (calcType && timeInputs && distanceInput && paceInputs) {
+                calcType.onchange = function() {
+                    const selectedValue = calcType.value;
+                    if (selectedValue === 'pace') {
+                        timeInputs.style.display = 'flex';
+                        distanceInput.style.display = 'block';
+                        paceInputs.style.display = 'none';
+                    } else if (selectedValue === 'time') {
+                        timeInputs.style.display = 'none';
+                        distanceInput.style.display = 'block';
+                        paceInputs.style.display = 'block';
+                    } else if (selectedValue === 'distance') {
+                        timeInputs.style.display = 'flex';
+                        distanceInput.style.display = 'none';
+                        paceInputs.style.display = 'block';
+                    }
+                };
+                calcType.onchange();
+            }
+            if (calculateBtn) {
+                calculateBtn.onclick = function() {
+                    const selectedValue = calcType.value;
+                    let result, resultLabel;
+                    if (selectedValue === 'pace') {
+                        const hours = parseInt(document.getElementById('hours').value) || 0;
+                        const minutes = parseInt(document.getElementById('minutes').value) || 0;
+                        const seconds = parseInt(document.getElementById('seconds').value) || 0;
+                        const distance = parseFloat(document.getElementById('distance').value) || 0;
+                        if (distance <= 0) {
+                            alert('Por favor, informe uma distância válida.');
+                            return;
+                        }
+                        if (hours === 0 && minutes === 0 && seconds === 0) {
+                            alert('Por favor, informe um tempo válido.');
+                            return;
+                        }
+                        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+                        const paceSeconds = totalSeconds / distance;
+                        const paceMinutes = Math.floor(paceSeconds / 60);
+                        const paceRemainingSeconds = Math.round(paceSeconds % 60);
+                        result = `${paceMinutes}:${paceRemainingSeconds.toString().padStart(2, '0')}`;
+                        resultLabel = 'Pace (min/km)';
+                        calculateEquivalents(paceSeconds);
+                    } else if (selectedValue === 'time') {
+                        const paceMinutes = parseInt(document.getElementById('pace-minutes').value) || 0;
+                        const paceSeconds = parseInt(document.getElementById('pace-seconds').value) || 0;
+                        const distance = parseFloat(document.getElementById('distance').value) || 0;
+                        if (distance <= 0) {
+                            alert('Por favor, informe uma distância válida.');
+                            return;
+                        }
+                        if (paceMinutes === 0 && paceSeconds === 0) {
+                            alert('Por favor, informe um pace válido.');
+                            return;
+                        }
+                        const paceInSeconds = (paceMinutes * 60) + paceSeconds;
+                        const totalSeconds = paceInSeconds * distance;
+                        const hours = Math.floor(totalSeconds / 3600);
+                        const remainingMinutes = Math.floor((totalSeconds % 3600) / 60);
+                        const remainingSeconds = Math.round(totalSeconds % 60);
+                        result = `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+                        resultLabel = 'Tempo Total';
+                        calculateEquivalents(paceInSeconds);
+                    } else if (selectedValue === 'distance') {
+                        const hours = parseInt(document.getElementById('hours').value) || 0;
+                        const minutes = parseInt(document.getElementById('minutes').value) || 0;
+                        const seconds = parseInt(document.getElementById('seconds').value) || 0;
+                        const paceMinutes = parseInt(document.getElementById('pace-minutes').value) || 0;
+                        const paceSeconds = parseInt(document.getElementById('pace-seconds').value) || 0;
+                        if (paceMinutes === 0 && paceSeconds === 0) {
+                            alert('Por favor, informe um pace válido.');
+                            return;
+                        }
+                        if (hours === 0 && minutes === 0 && seconds === 0) {
+                            alert('Por favor, informe um tempo válido.');
+                            return;
+                        }
+                        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+                        const paceInSeconds = (paceMinutes * 60) + paceSeconds;
+                        const distance = totalSeconds / paceInSeconds;
+                        result = distance.toFixed(2);
+                        resultLabel = 'Distância (km)';
+                        calculateEquivalents(paceInSeconds);
+                    }
+                    document.getElementById('result-value').textContent = result;
+                    document.getElementById('result-label').textContent = resultLabel;
+                    resultCard.style.display = 'block';
+                    resultCard.classList.add('fade-in');
+                    setTimeout(() => {
+                        resultCard.classList.remove('fade-in');
+                    }, 1000);
+                    resultCard.scrollIntoView({ behavior: 'smooth' });
+                };
+            }
+            // Função para equivalentes
+            function calculateEquivalents(paceInSeconds) {
+                const fiveK = formatTime(5 * paceInSeconds);
+                const tenK = formatTime(10 * paceInSeconds);
+                const halfMarathon = formatTime(21.0975 * paceInSeconds);
+                const marathon = formatTime(42.195 * paceInSeconds);
+                document.getElementById('equiv-5k').textContent = fiveK;
+                document.getElementById('equiv-10k').textContent = tenK;
+                document.getElementById('equiv-half').textContent = halfMarathon;
+                document.getElementById('equiv-full').textContent = marathon;
+            }
+            function formatTime(totalSeconds) {
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = Math.round(totalSeconds % 60);
+                if (hours > 0) {
+                    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                } else {
+                    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }
         } else if (page === 'tables' && typeof initTables === 'function') {
             initTables();
         } else if (page === 'home') {
