@@ -32,7 +32,6 @@
             <ul class="nav-links">
                 <li><a href="#home" data-page="home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#calculator" data-page="calculator" class="nav-link"><i class="fas fa-calculator"></i> Calculadora</a></li>
-                <li><a href="#tables" data-page="tables" class="nav-link"><i class="fas fa-table"></i> Tabelas</a></li>
                 <li><a href="#about" data-page="about" class="nav-link"><i class="fas fa-info-circle"></i> Sobre Pace</a></li>
                 <li><a href="#tips" data-page="tips" class="nav-link"><i class="fas fa-lightbulb"></i> Dicas</a></li>
             </ul>
