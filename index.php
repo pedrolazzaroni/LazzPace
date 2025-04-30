@@ -382,148 +382,82 @@
                     <p>Entenda o conceito de pace e sua importância para corredores</p>
                 </div>
             </header>
-
             <main class="container">
                 <section class="about-section">
-                    <div class="card">
-                        <h2><i class="fas fa-question-circle"></i> O que é Pace?</h2>
-                        <div class="card-content">
-                            <p>Pace é o tempo que você leva para percorrer uma unidade de distância, geralmente medido em minutos por quilômetro (min/km) ou minutos por milha (min/mi).</p>
-                            
-                            <div class="info-block">
-                                <div class="info-icon">
-                                    <i class="fas fa-info"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p>O pace é uma métrica fundamental para corredores de todos os níveis, pois permite monitorar o esforço de forma mais precisa do que apenas a velocidade.</p>
-                                </div>
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <h2><i class="fas fa-question-circle"></i> O que é Pace?</h2>
+                            <p><span class="about-highlight">Pace</span> é o tempo que você leva para percorrer uma unidade de distância, geralmente expresso em minutos por quilômetro (min/km) ou minutos por milha (min/mi). É a métrica mais usada por corredores para monitorar e planejar treinos e provas.</p>
+                            <div class="about-info-box">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Quanto menor o pace, mais rápido você está correndo!</span>
                             </div>
-                            
-                            <div class="illustration">
-                                <img src="https://via.placeholder.com/600x300/14191f/7fc9ff?text=Ilustração+de+Pace" alt="Ilustração conceitual de pace" class="responsive-img">
+                        </div>
+                        <div class="about-card">
+                            <h2><i class="fas fa-bolt"></i> Por que o Pace é Importante?</h2>
+                            <ul class="about-list">
+                                <li><strong>Controle de Intensidade:</strong> Permite ajustar o esforço durante treinos e provas.</li>
+                                <li><strong>Planejamento:</strong> Ajuda a definir metas realistas e estratégias de prova.</li>
+                                <li><strong>Acompanhamento:</strong> Facilita a análise da evolução do desempenho.</li>
+                                <li><strong>Motivação:</strong> Ver seu pace melhorar é um ótimo incentivo!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <h2><i class="fas fa-calculator"></i> Como Calcular o Pace</h2>
+                            <div class="about-formula-box">
+                                <span>Pace (min/km) = Tempo total (min) ÷ Distância (km)</span>
+                            </div>
+                            <div class="about-example-box">
+                                <strong>Exemplo:</strong>
+                                <p>Se você correu 10 km em 50 minutos:</p>
+                                <div class="about-formula-inline">50 ÷ 10 = 5 min/km</div>
+                                <p>Seu pace é <span class="about-highlight">5:00 min/km</span>.</p>
+                            </div>
+                        </div>
+                        <div class="about-card">
+                            <h2><i class="fas fa-exchange-alt"></i> Conversão de Unidades</h2>
+                            <div class="about-formula-box">
+                                <span>Pace (min/mi) = Pace (min/km) × 1,609</span>
+                            </div>
+                            <div class="about-example-box">
+                                <strong>Exemplo:</strong>
+                                <p>5:00 min/km ≈ 8:03 min/mi</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="card">
-                        <h2><i class="fas fa-chart-line"></i> Por que o Pace é Importante?</h2>
-                        <div class="card-content">
-                            <p>O controle do pace é um dos fatores mais importantes para o sucesso em corridas de longa distância. Entender e aplicar estratégias baseadas no pace proporciona diversos benefícios:</p>
-                            
-                            <div class="benefits-grid">
-                                <div class="benefit-card">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-tachometer-alt"></i>
-                                    </div>
-                                    <h3>Controle de Intensidade</h3>
-                                    <p>O pace ajuda a monitorar a intensidade do seu treino, permitindo que você mantenha o esforço adequado para cada tipo de corrida.</p>
-                                </div>
-                                
-                                <div class="benefit-card">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-route"></i>
-                                    </div>
-                                    <h3>Planejamento de Provas</h3>
-                                    <p>Estabelecer metas de pace realistas para diferentes segmentos de uma corrida é essencial para alcançar seu melhor desempenho.</p>
-                                </div>
-                                
-                                <div class="benefit-card">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-chart-bar"></i>
-                                    </div>
-                                    <h3>Acompanhamento de Evolução</h3>
-                                    <p>Monitorar seu pace ao longo do tempo é uma das melhores formas de acompanhar sua evolução como corredor.</p>
-                                </div>
-                                
-                                <div class="benefit-card">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-medal"></i>
-                                    </div>
-                                    <h3>Estabelecimento de Metas</h3>
-                                    <p>Definir metas de pace específicas para treinos e provas torna seus objetivos mais concretos e mensuráveis.</p>
-                                </div>
+                    <div class="about-zones-card">
+                        <h2><i class="fas fa-heartbeat"></i> Zonas de Pace</h2>
+                        <div class="about-zones-grid">
+                            <div class="zone-card">
+                                <h3>Recuperação</h3>
+                                <p>Pace leve, ideal para regeneração.</p>
+                                <span class="zone-percent">65-75% do pace de prova</span>
+                            </div>
+                            <div class="zone-card">
+                                <h3>Fácil</h3>
+                                <p>Conversacional, para treinos longos.</p>
+                                <span class="zone-percent">75-85%</span>
+                            </div>
+                            <div class="zone-card">
+                                <h3>Moderado</h3>
+                                <p>Ritmo constante, melhora resistência.</p>
+                                <span class="zone-percent">85-90%</span>
+                            </div>
+                            <div class="zone-card">
+                                <h3>Limiar</h3>
+                                <p>Desafiador, próximo ao máximo sustentável.</p>
+                                <span class="zone-percent">90-100%</span>
+                            </div>
+                            <div class="zone-card">
+                                <h3>Intervalos</h3>
+                                <p>Alta intensidade, para VO2max.</p>
+                                <span class="zone-percent">100-110%</span>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h2><i class="fas fa-calculator"></i> Como Calcular o Pace</h2>
-                        <div class="card-content">
-                            <p>O cálculo do pace é bastante simples. A fórmula básica é:</p>
-                            
-                            <div class="formula-box">
-                                <h3>Pace (min/km) = Tempo total (minutos) ÷ Distância (km)</h3>
-                            </div>
-                            
-                            <h3>Exemplo prático:</h3>
-                            <div class="example-box">
-                                <p>Se você correu 5 km em 25 minutos:</p>
-                                <div class="formula-box formula-box-secondary">
-                                    <p>25 minutos ÷ 5 km = 5 minutos/km</p>
-                                </div>
-                                <p>Seu pace é de 5:00 min/km.</p>
-                            </div>
-                            
-                            <h3>Conversão entre unidades:</h3>
-                            <p>Se você prefere trabalhar com milhas:</p>
-                            <div class="formula-box formula-box-secondary">
-                                <p>Pace (min/mi) = Pace (min/km) × 1,609</p>
-                            </div>
-                            <p>Assim, um pace de 5:00 min/km equivale a aproximadamente 8:03 min/mi.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h2><i class="fas fa-heartbeat"></i> Pace e Zonas de Treinamento</h2>
-                        <div class="card-content">
-                            <p>O pace pode ser categorizado em diferentes zonas de intensidade, cada uma com um propósito específico no treinamento:</p>
-                            
-                            <div class="table-container">
-                                <table class="training-zones">
-                                    <thead>
-                                        <tr>
-                                            <th>Zona</th>
-                                            <th>Descrição</th>
-                                            <th>% do Pace de Competição</th>
-                                            <th>Benefício</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Recuperação</td>
-                                            <td>Pace muito leve</td>
-                                            <td>65-75%</td>
-                                            <td>Recuperação ativa, melhora circulação</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fácil</td>
-                                            <td>Conversacional</td>
-                                            <td>75-85%</td>
-                                            <td>Base aeróbica, economia de corrida</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Moderado</td>
-                                            <td>Ritmo constante</td>
-                                            <td>85-90%</td>
-                                            <td>Resistência aeróbica</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Limiar</td>
-                                            <td>Desafiador, sustentável</td>
-                                            <td>90-100%</td>
-                                            <td>Aumenta limiar anaeróbico</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Intervalos</td>
-                                            <td>Alta intensidade</td>
-                                            <td>100-110%</td>
-                                            <td>VO2max, potência</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <p class="note">Nota: Estas porcentagens são aproximadas e podem variar de acordo com a metodologia de treinamento e características individuais.</p>
+                        <div class="about-curiosity">
+                            <i class="fas fa-lightbulb"></i> <span>Curiosidade:</span> Muitos corredores usam o pace para controlar zonas de treinamento e evitar treinar sempre na mesma intensidade!
                         </div>
                     </div>
                 </section>
@@ -538,15 +472,15 @@
                     <p>Estratégias e técnicas para aumentar seu desempenho na corrida</p>
                 </div>
             </header>
-
             <main class="container">
                 <section class="tips-section">
                     <div class="tips-intro card">
                         <h2><i class="fas fa-lightbulb"></i> Como Melhorar seu Ritmo</h2>
                         <p>Melhorar seu pace de corrida requer uma abordagem metódica e consistente. As dicas a seguir foram selecionadas com base em evidências científicas e experiência prática de treinadores e atletas.</p>
-                        <p>Lembre-se que a progressão deve ser gradual para evitar lesões e permitir que seu corpo se adapte adequadamente.</p>
+                        <div class="tips-highlight-box">
+                            <i class="fas fa-flag-checkered"></i> <strong>Progresso gradual:</strong> Aumente volume e intensidade aos poucos para evitar lesões.
+                        </div>
                     </div>
-                    
                     <div class="tips-grid">
                         <div class="tip-card">
                             <div class="tip-header">
@@ -554,79 +488,113 @@
                                 <h3>Treinos Intervalados</h3>
                             </div>
                             <div class="tip-content">
-                                <p>Alterne entre períodos de alta intensidade e recuperação para desenvolver tanto sua potência quanto resistência.</p>
-                                
-                                <div class="tip-example">
-                                    <h4>Exemplo de treino:</h4>
-                                    <ul>
-                                        <li>Aquecimento: 10 minutos de corrida leve</li>
-                                        <li>8-10 repetições de 400m em ritmo forte</li>
-                                        <li>200m de recuperação entre cada repetição</li>
-                                        <li>Volta à calma: 10 minutos de corrida leve</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="tip-benefits">
-                                    <h4>Benefícios:</h4>
-                                    <ul>
-                                        <li>Aumenta o VO2max (consumo máximo de oxigênio)</li>
-                                        <li>Melhora a tolerância ao lactato</li>
-                                        <li>Desenvolve força muscular específica</li>
-                                    </ul>
+                                <ul>
+                                    <li>Alterne entre alta intensidade e recuperação.</li>
+                                    <li>Exemplo: 8x400m forte + 200m leve.</li>
+                                </ul>
+                                <div class="tip-benefit-box">
+                                    <i class="fas fa-arrow-up"></i> <strong>Benefícios:</strong> Aumenta VO2max, tolerância ao lactato e força específica.
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="tip-card">
                             <div class="tip-header">
                                 <div class="tip-icon"><i class="fas fa-heartbeat"></i></div>
                                 <h3>Treinamento em Zonas</h3>
                             </div>
                             <div class="tip-content">
-                                <p>Estruture seus treinos com base nas zonas de frequência cardíaca para otimizar cada sessão de acordo com seu objetivo específico.</p>
-                                
-                                <div class="tip-example">
-                                    <h4>Distribuição recomendada:</h4>
-                                    <ul>
-                                        <li>80% dos treinos em intensidade baixa (Zonas 1-2)</li>
-                                        <li>20% dos treinos em intensidade alta (Zonas 4-5)</li>
-                                        <li>Evite a "zona cinzenta" (Zona 3) constantemente</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="tip-benefits">
-                                    <h4>Benefícios:</h4>
-                                    <ul>
-                                        <li>Evita sobrecarga e burnout</li>
-                                        <li>Maximiza adaptações específicas</li>
-                                        <li>Permite recuperação adequada</li>
-                                    </ul>
+                                <ul>
+                                    <li>80% dos treinos em baixa intensidade (zonas 1-2).</li>
+                                    <li>20% em alta intensidade (zonas 4-5).</li>
+                                </ul>
+                                <div class="tip-benefit-box">
+                                    <i class="fas fa-balance-scale"></i> <strong>Benefícios:</strong> Evita sobrecarga, maximiza adaptações e permite recuperação.
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- ...restante dos tip-cards... -->
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <div class="tip-icon"><i class="fas fa-shoe-prints"></i></div>
+                                <h3>Fortalecimento Muscular</h3>
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Inclua treinos de força para pernas e core.</li>
+                                    <li>Exemplo: agachamentos, avanços, prancha.</li>
+                                </ul>
+                                <div class="tip-benefit-box">
+                                    <i class="fas fa-dumbbell"></i> <strong>Benefícios:</strong> Reduz risco de lesão e melhora eficiência da corrida.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <div class="tip-icon"><i class="fas fa-bed"></i></div>
+                                <h3>Recuperação e Sono</h3>
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Durma bem e respeite dias de descanso.</li>
+                                    <li>Inclua alongamentos e massagem.</li>
+                                </ul>
+                                <div class="tip-benefit-box">
+                                    <i class="fas fa-moon"></i> <strong>Benefícios:</strong> Previne overtraining e potencializa adaptações.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <div class="tip-icon"><i class="fas fa-apple-alt"></i></div>
+                                <h3>Nutrição Inteligente</h3>
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Alimente-se de forma equilibrada e hidrate-se.</li>
+                                    <li>Consuma carboidratos antes e após treinos longos.</li>
+                                </ul>
+                                <div class="tip-benefit-box">
+                                    <i class="fas fa-seedling"></i> <strong>Benefícios:</strong> Garante energia e recuperação muscular.</n></div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <section class="common-mistakes">
+                    <div class="tips-curiosity">
+                        <i class="fas fa-lightbulb"></i> <strong>Curiosidade:</strong> Pequenas melhorias de pace acumuladas ao longo de meses podem resultar em grandes conquistas!
+                    </div>
+                    <div class="tips-mistakes">
                         <div class="card">
                             <h2><i class="fas fa-exclamation-triangle"></i> Erros Comuns a Evitar</h2>
-                            
-                            <div class="mistakes-container">
-                                <div class="mistake-item">
-                                    <div class="mistake-icon">
-                                        <i class="fas fa-bolt"></i>
-                                    </div>
+                            <div class="mistakes-grid">
+                                <div class="mistake-card">
+                                    <div class="mistake-icon"><i class="fas fa-bolt"></i></div>
                                     <div class="mistake-content">
                                         <h3>Começar Rápido Demais</h3>
-                                        <p>Iniciar uma corrida em ritmo muito mais rápido do que você consegue manter leva à fadiga prematura. Comece conservador e acelere gradualmente.</p>
+                                        <p>Iniciar em ritmo muito forte pode levar à fadiga precoce. Controle o início!</p>
                                     </div>
                                 </div>
-                                
-                                <!-- ...restante dos mistake-items... -->
+                                <div class="mistake-card">
+                                    <div class="mistake-icon"><i class="fas fa-tint"></i></div>
+                                    <div class="mistake-content">
+                                        <h3>Negligenciar Hidratação</h3>
+                                        <p>Desidratação prejudica o desempenho e a saúde. Beba água regularmente.</p>
+                                    </div>
+                                </div>
+                                <div class="mistake-card">
+                                    <div class="mistake-icon"><i class="fas fa-bed"></i></div>
+                                    <div class="mistake-content">
+                                        <h3>Ignorar Descanso</h3>
+                                        <p>O corpo precisa de tempo para se recuperar e evoluir. Respeite o sono e os dias de folga.</p>
+                                    </div>
+                                </div>
+                                <div class="mistake-card">
+                                    <div class="mistake-icon"><i class="fas fa-ban"></i></div>
+                                    <div class="mistake-content">
+                                        <h3>Treinar Sempre Forte</h3>
+                                        <p>Treinar em alta intensidade o tempo todo aumenta o risco de lesão e estagnação.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </section>
             </main>
         </div>
