@@ -2307,3 +2307,199 @@ copyright p {
         grid-template-columns: 1fr;
     }
 }
+
+/* ====== ESTILOS PARA ABOUT (SOBRE PACE) ====== */
+.about-section {
+    margin-bottom: 40px;
+}
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 32px;
+}
+.about-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(250, 107, 13, 0.07);
+    border: 1.5px solid var(--primary);
+    padding: 28px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: box-shadow 0.2s, border 0.2s, transform 0.2s;
+}
+.about-card:hover {
+    box-shadow: 0 8px 24px rgba(250, 107, 13, 0.13);
+    border-color: var(--primary-dark);
+    transform: translateY(-4px) scale(1.03);
+}
+.about-card h2 {
+    color: var(--primary);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.about-highlight {
+    color: var(--primary);
+    font-weight: 600;
+}
+.about-info-box {
+    background: rgba(var(--primary), 0.08);
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-top: 10px;
+    color: var(--primary-dark);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.about-formula-box {
+    background: rgba(var(--primary), 0.09);
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 12px 0 10px 0;
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 1.08rem;
+}
+.about-formula-inline {
+    display: inline-block;
+    background: rgba(var(--primary), 0.07);
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: var(--primary);
+    font-weight: 600;
+    margin: 0 4px;
+}
+.about-example-box {
+    background: rgba(var(--primary), 0.06);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 10px 0 10px 0;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+.illustration {
+    margin: 18px 0 0 0;
+    text-align: center;
+}
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(250, 107, 13, 0.07);
+}
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    margin-top: 18px;
+}
+.benefit-card {
+    background: rgba(var(--primary), 0.06);
+    border-radius: 10px;
+    padding: 14px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.2s, border 0.2s;
+}
+.benefit-icon {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 2px;
+}
+.benefit-card h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.08rem;
+    color: var(--primary);
+}
+.benefit-card p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.98rem;
+}
+/* Tabela de Zonas de Treinamento */
+.pace-zones-table {
+    margin-top: 18px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 1.05rem;
+}
+.pace-zones-table th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border: none;
+}
+.pace-zones-table td {
+    text-align: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.pace-zones-table tr:last-child td {
+    border-bottom: none;
+}
+.pace-zones-table .zone-recuperacao td {
+    background: #e8f7e0;
+    color: #3a7d3a;
+}
+.pace-zones-table .zone-facil td {
+    background: #f7f3e0;
+    color: #bfa600;
+}
+.pace-zones-table .zone-moderado td {
+    background: #e0f0f7;
+    color: #1a6d8f;
+}
+.pace-zones-table .zone-limiar td {
+    background: #fbeee6;
+    color: #d2691e;
+}
+.pace-zones-table .zone-intervalos td {
+    background: #fbe0e0;
+    color: #c0392b;
+}
+.pace-zones-legend {
+    margin: 18px 0 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.zone-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    background: rgba(var(--primary), 0.08);
+    color: var(--primary-dark);
+}
+.zone-legend.zone-recuperacao { background: #e8f7e0; color: #3a7d3a; }
+.zone-legend.zone-facil { background: #f7f3e0; color: #bfa600; }
+.zone-legend.zone-moderado { background: #e0f0f7; color: #1a6d8f; }
+.zone-legend.zone-limiar { background: #fbeee6; color: #d2691e; }
+.zone-legend.zone-intervalos { background: #fbe0e0; color: #c0392b; }
+.note {
+    color: var(--text-light);
+    font-size: 0.97rem;
+    margin-top: 10px;
+    font-style: italic;
+}
+@media (max-width: 900px) {
+    .about-grid, .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}
