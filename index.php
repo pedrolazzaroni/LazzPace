@@ -19,7 +19,6 @@
             </div>
         </div>
     </div>
-
     <!-- Navbar -->
     <nav class="main-navbar">
         <div class="container navbar-container">
