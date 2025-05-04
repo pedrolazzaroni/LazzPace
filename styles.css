@@ -1426,3 +1426,89 @@ footer {
         justify-content: center;
     }
 }
+
+/* ====== Tabela de Pace e Zonas de Treinamento ====== */
+.styled-table-container {
+    overflow-x: auto;
+    margin: 24px 0 16px 0;
+}
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg, #222);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 1rem;
+    min-width: 340px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.styled-table th, .styled-table td {
+    padding: 14px 12px;
+    text-align: left;
+}
+.styled-table thead th {
+    background: #181818;
+    color: #fff;
+    font-weight: 700;
+    border-bottom: 2px solid #fa6b0d;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s;
+}
+.styled-table tbody tr:nth-child(even) {
+    background: rgba(255,255,255,0.03);
+}
+.styled-table tbody tr:hover {
+    background: rgba(250,107,13,0.08);
+}
+.styled-table td {
+    color: #eee;
+    vertical-align: middle;
+}
+
+/* Cores para cada zona */
+.zone-recuperacao td, .zone-recuperacao .zone-legend {
+    border-left: 4px solid #4caf50;
+}
+.zone-facil td, .zone-facil .zone-legend {
+    border-left: 4px solid #2196f3;
+}
+.zone-moderado td, .zone-moderado .zone-legend {
+    border-left: 4px solid #ffeb3b;
+}
+.zone-limiar td, .zone-limiar .zone-legend {
+    border-left: 4px solid #ff9800;
+}
+.zone-intervalos td, .zone-intervalos .zone-legend {
+    border-left: 4px solid #e53935;
+}
+
+.pace-zones-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 12px 0 0 0;
+}
+.zone-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.98rem;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .styled-table th, .styled-table td {
+        padding: 10px 6px;
+        font-size: 0.95rem;
+    }
+    .pace-zones-legend {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
