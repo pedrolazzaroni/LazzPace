@@ -1416,7 +1416,7 @@ footer::before {
 }
 
 .footer-links a {
-    color: var(--text-light);
+    color: #fff;
     text-decoration: none;
     display: block;
     margin-bottom: 12px;
@@ -1436,7 +1436,7 @@ footer::before {
 }
 
 .footer-links a:hover {
-    color: var(--primary);
+    color: var(--text-light);
     transform: translateX(5px);
 }
 
