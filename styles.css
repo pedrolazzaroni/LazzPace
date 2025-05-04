@@ -236,8 +236,6 @@ body {
     color: #fff;
     border: none;
     outline: none;
-    font-weight: 600;
-    font-size: 1.08rem;
     padding: 8px 0 6px 0;
     border-radius: 0;
     position: relative;
@@ -257,10 +255,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 3px;
+    height: 2px;
     background: #d2691e;
-    border-radius: 2px 2px 0 0;
     transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
     z-index: 2;
 }
