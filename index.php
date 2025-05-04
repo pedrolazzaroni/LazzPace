@@ -53,42 +53,32 @@
     </div>
 
     <!-- Footer - Redesigned -->
-    <footer style="margin-top:0;">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h2><span class="highlight">Lazz</span>Pace</h2>
-                    <p>Sua ferramenta completa para cálculo e análise de ritmo de corrida, desenvolvida para corredores de todos os níveis.</p>
-                    <p class="footer-tagline">Corra mais inteligente, não apenas mais rápido.</p>
+                    <img src="assets/favicon.png" alt="Logo">
+                    <span>Pedro Lazzaroni</span>
                 </div>
-                <div class="footer-links">
-                    <h3>Links Rápidos</h3>
-                    <ul>
-                        <li><a href="#calculator" data-page="calculator" class="nav-link">Calculadora de Pace</a></li>
-                        <li><a href="#about" data-page="about" class="nav-link">Sobre o Pace</a></li>
-                        <li><a href="#tips" data-page="tips" class="nav-link">Dicas de Treinamento</a></li>
-                    </ul>
-                </div>
-                <div class="social-links">
-                    <h3>Conecte-se</h3>
-                    <div class="social-icons">
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="Strava"><i class="fab fa-strava"></i></a>
-                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <p class="newsletter-cta">Receba dicas e novidades sobre corrida:</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
+                
+                <div class="footer-social">
+                    <a href="https://linkedin.com/in/pedrolazzaroni" class="social-link" target="_blank">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/pedrolazzaroni" class="social-link" target="_blank">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="https://www.instagram.com/pedro_lazzaroni" class="social-link" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="mailto:contato@pedrolazzaroni.com.br" class="social-link">
+                        <i class="bi bi-envelope"></i>
+                    </a>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; <?php echo date('Y'); ?> LazzPace - Todos os direitos reservados</p>
-                <p class="footer-credits">Desenvolvido com <i class="fas fa-heart"></i> para corredores</p>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pedro Lazzaroni. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
