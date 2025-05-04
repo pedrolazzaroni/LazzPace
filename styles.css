@@ -493,6 +493,55 @@ body {
     opacity: 1;
 }
 
+/* ====== Botão btn-pulse ====== */
+.btn-pulse {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #fa6b0d 0%, #ff9800 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08rem;
+    padding: 13px 32px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(250,107,13,0.13);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+}
+.btn-pulse:hover, .btn-pulse:focus {
+    background: linear-gradient(90deg, #ff9800 0%, #fa6b0d 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(250,107,13,0.18);
+}
+.btn-pulse:active {
+    transform: scale(0.98);
+}
+.btn-pulse::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s, opacity 0.4s;
+    opacity: 0;
+    z-index: 0;
+}
+.btn-pulse:active::after {
+    width: 180px;
+    height: 180px;
+    opacity: 1;
+    transition: 0s;
+}
+
+/* Result Box */
 .result-box {
     margin-top: 15px;
     background-color: rgba(var(--primary), 0.05);
@@ -535,6 +584,101 @@ body {
     color: var(--text-light);
     position: relative;
     z-index: 1;
+}
+
+/* ====== Resultado da Calculadora ====== */
+.result-card, .result-box {
+    background: #232526;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(250,107,13,0.10);
+    padding: 32px 24px 24px 24px;
+    margin: 28px auto 0 auto; /* Centraliza horizontalmente */
+    color: #fff;
+    border: 1.5px solid #fa6b0d22;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.7s;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza conteúdo interno */
+}
+.result-card h2, .result-box span {
+    color: #fa6b0d;
+    font-weight: 700;
+    margin-bottom: 18px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.result-value {
+    font-size: 2.7rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 8px #fa6b0d33;
+    text-align: center;
+}
+.result-label {
+    font-size: 1.1rem;
+    color: #ffb733;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.result-extras {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.extra-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 10px;
+    justify-content: center; /* Centraliza os itens extra */
+}
+.extra-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 12px 18px;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.07);
+    margin: 0 auto; /* Centraliza se possível */
+}
+.extra-label {
+    color: #fa6b0d;
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-align: center;
+}
+.extra-value {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-align: center;
+}
+@media (max-width: 600px) {
+    .result-card, .result-box {
+        padding: 18px 8px 16px 8px;
+        margin: 18px auto 0 auto;
+    }
+    .result-value {
+        font-size: 2rem;
+    }
+    .extra-items {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
 }
 
 /* Features Section - Reduzido o espaçamento */
