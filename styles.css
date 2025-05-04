@@ -219,6 +219,61 @@ body {
     background-color: var(--primary);
 }
 
+/* ====== NOVOS ESTILOS PARA NAV-LINKS ====== */
+.nav-links.nav-underline {
+    display: flex;
+    gap: 0;
+}
+.nav-links.nav-underline li {
+    margin: 0 0 0 32px;
+    position: relative;
+}
+.nav-links.nav-underline li:first-child {
+    margin-left: 0;
+}
+.nav-links.nav-underline .nav-link {
+    background: none;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 1.08rem;
+    padding: 8px 0 6px 0;
+    border-radius: 0;
+    position: relative;
+    transition: color 0.2s;
+    box-shadow: none;
+    display: inline-block;
+    text-decoration: none;
+}
+.nav-links.nav-underline .nav-link span {
+    position: relative;
+    z-index: 1;
+}
+.nav-links.nav-underline .nav-link::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: #d2691e;
+    border-radius: 2px 2px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+    z-index: 2;
+}
+.nav-links.nav-underline .nav-link.active,
+.nav-links.nav-underline .nav-link:hover {
+    color: #d2691e;
+    background: none;
+}
+.nav-links.nav-underline .nav-link.active::after,
+.nav-links.nav-underline .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
 /* Hero Section - Diminuído e mais moderno */
 .hero {
     background: var(--gradient);

@@ -27,11 +27,11 @@
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home" data-page="home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#calculator" data-page="calculator" class="nav-link"><i class="fas fa-calculator"></i> Calculadora</a></li>
-                <li><a href="#about" data-page="about" class="nav-link"><i class="fas fa-info-circle"></i> Sobre Pace</a></li>
-                <li><a href="#tips" data-page="tips" class="nav-link"><i class="fas fa-lightbulb"></i> Dicas</a></li>
+            <ul class="nav-links nav-underline">
+                <li><a href="#home" data-page="home" class="nav-link active"><span>Home</span></a></li>
+                <li><a href="#calculator" data-page="calculator" class="nav-link"><span>Calculadora</span></a></li>
+                <li><a href="#about" data-page="about" class="nav-link"><span>Sobre Pace</span></a></li>
+                <li><a href="#tips" data-page="tips" class="nav-link"><span>Dicas</span></a></li>
             </ul>
             <div class="theme-container">
                 <div class="theme-switcher">
