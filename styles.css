@@ -130,10 +130,6 @@ body {
     color: var(--light-text);
 }
 
-.highlight {
-    color: var(--primary);
-}
-
 .nav-links {
     display: flex;
     list-style: none;
