@@ -25,26 +25,26 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!mainContent) return;
         if (currentPage === page && mainContent.innerHTML.trim() !== '') return;
         currentPage = page;
-        mainContent.classList.add('spa-exit');
+        mainContent.classList.remove('fade-in-animation');
+        mainContent.classList.add('fade-out-animation');
         setTimeout(async () => {
             mainContent.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><p class="loading-text">Carregando...</p></div>';
+            mainContent.classList.remove('fade-out-animation');
             try {
                 let partialPath = `partials/${page}.html`;
                 const response = await fetch(partialPath);
                 if (!response.ok) throw new Error('Conteúdo não encontrado.');
                 const html = await response.text();
                 mainContent.innerHTML = html;
-                mainContent.classList.remove('spa-exit');
-                mainContent.classList.add('spa-enter');
-                setTimeout(() => mainContent.classList.remove('spa-enter'), 600);
+                mainContent.classList.add('fade-in-animation');
+                setTimeout(() => mainContent.classList.remove('fade-in-animation'), 600);
                 initSectionScripts(page);
             } catch (e) {
                 mainContent.innerHTML = `<div class="error-message"><h2>Não foi possível carregar o conteúdo</h2><p>${e.message}</p></div>`;
-                mainContent.classList.remove('spa-exit');
             }
             updateActiveLinks(page);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 250);
+        }, 400); // tempo igual ao fade-out
     }
 
     function updateActiveLinks(page) {
@@ -78,6 +78,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         loadPage(page);
     });
+
+    // SPA Page Fade Animation
+    function loadPageWithFade(url, containerSelector = '#main-content') {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+        container.classList.remove('fade-in-animation');
+        container.classList.add('fade-out-animation');
+        setTimeout(() => {
+            fetch(url)
+                .then(res => res.text())
+                .then(html => {
+                    container.innerHTML = html;
+                    container.classList.remove('fade-out-animation');
+                    container.classList.add('fade-in-animation');
+                });
+        }, 400); // tempo igual ao fade-out
+    }
 
     // Inicialização da página
     function init() {

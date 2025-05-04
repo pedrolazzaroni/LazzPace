@@ -654,6 +654,22 @@ body {
     }
 }
 
+/* SPA Page Fade Animations */
+.fade-in-animation {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+.fade-out-animation {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
 /* Loader de página */
 .loading-container {
     display: flex;
