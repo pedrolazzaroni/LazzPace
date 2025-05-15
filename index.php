@@ -23,9 +23,11 @@
     </div>
     <nav class="main-navbar">
         <div class="container navbar-container">
-            <div class="logo">
-                <h1><span class="highlight">Lazz</span>Pace</h1>
-            </div>
+            <a href="#" style="text-decoration: none;">
+                <div class="logo">
+                    <h1><span class="highlight">Lazz</span>Pace</h1>
+                </div>
+            </a>
             <div class="menu-toggle" id="menu-toggle">
                 <span class="bar bar1"></span>
                 <span class="bar bar2"></span>
