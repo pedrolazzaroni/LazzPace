@@ -1902,3 +1902,72 @@ footer {
         padding: 10px 6px;
     }
 }
+
+/* ====== Cards de Distâncias Comuns ====== */
+.distance-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin: 24px 0 0 0;
+}
+.distance-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    padding: 22px 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+    min-height: 180px;
+    position: relative;
+    text-align: left;
+}
+.distance-card:hover {
+    box-shadow: 0 8px 24px rgba(250,107,13,0.13);
+    border-color: #fa6b0d55;
+    transform: translateY(-4px) scale(1.03);
+}
+.distance-icon {
+    font-size: 2.1rem;
+    color: #fa6b0d;
+    background: rgba(250,107,13,0.10);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.08);
+    margin-bottom: 10px;
+}
+.distance-card h3 {
+    font-size: 1.18rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0 0 6px 0;
+}
+.distance-card p {
+    color: var(--text-light);
+    font-size: 0.97rem;
+    margin: 0 0 10px 0;
+}
+.distance-info {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--text-light);
+    font-size: 0.97rem;
+}
+.distance-info li {
+    margin-bottom: 4px;
+}
+@media (max-width: 700px) {
+    .distance-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .distance-card {
+        padding: 12px 8px 10px 8px;
+    }
+}
