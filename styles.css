@@ -1656,3 +1656,147 @@ footer {
         gap: 6px;
     }
 }
+
+/* ====== Tips Grid (Dicas - Tabela Visual) ====== */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin: 32px 0 24px 0;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    justify-items: center;
+}
+.tip-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid var(--border-color);
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative;
+    min-height: 0;
+    max-width: 370px;
+    width: 100%;
+}
+.tip-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(250,107,13,0.13);
+    border-color: var(--primary);
+}
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.tip-icon {
+    font-size: 1.7rem;
+    color: #fa6b0d;
+    background: rgba(250,107,13,0.10);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.08);
+}
+.tip-header h3 {
+    font-size: 1.13rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0;
+}
+.tip-content ul {
+    margin: 0 0 10px 0;
+    padding-left: 18px;
+    color: var(--text-light);
+    font-size: 0.98rem;
+}
+.tip-benefit-box {
+    background: rgba(250,107,13,0.10);
+    color: #fa6b0d;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 0.97rem;
+    font-weight: 600;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+@media (max-width: 700px) {
+    .tips-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .tip-card {
+        padding: 16px 8px 12px 8px;
+        max-width: 100%;
+    }
+}
+
+/* ====== Cards de Erros (Mistakes) ====== */
+.mistakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 18px;
+}
+.mistake-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    padding: 20px 16px 16px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+    min-height: 120px;
+    position: relative;
+}
+.mistake-card:hover {
+    box-shadow: 0 8px 24px rgba(250,107,13,0.13);
+    border-color: #fa6b0d55;
+    transform: translateY(-4px) scale(1.03);
+}
+.mistake-icon {
+    font-size: 1.6rem;
+    color: #fa6b0d;
+    background: rgba(250,107,13,0.10);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.08);
+    flex-shrink: 0;
+}
+.mistake-content h3 {
+    font-size: 1.08rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+.mistake-content p {
+    color: var(--text-light);
+    font-size: 0.97rem;
+    margin: 0;
+}
+@media (max-width: 700px) {
+    .mistakes-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .mistake-card {
+        padding: 12px 8px 10px 8px;
+    }
+}
