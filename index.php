@@ -26,8 +26,10 @@
             <div class="logo">
                 <h1><span class="highlight">Lazz</span>Pace</h1>
             </div>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
+            <div class="menu-toggle" id="menu-toggle">
+                <span class="bar bar1"></span>
+                <span class="bar bar2"></span>
+                <span class="bar bar3"></span>
             </div>
             <ul class="nav-links nav-underline">
                 <li><a href="#home" data-page="home" class="nav-link active"><span>Home</span></a></li>
