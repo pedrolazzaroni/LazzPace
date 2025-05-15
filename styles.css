@@ -1589,6 +1589,10 @@ footer {
 .styled-table th, .styled-table td {
     padding: 14px 12px;
     text-align: left;
+    color: #222; /* cinza escuro para modo claro */
+}
+.dark-theme .styled-table th, .dark-theme .styled-table td {
+    color: #eee; /* mantém claro no modo escuro */
 }
 .styled-table thead th {
     background: #181818;
@@ -1607,7 +1611,6 @@ footer {
     background: rgba(250,107,13,0.08);
 }
 .styled-table td {
-    color: #eee;
     vertical-align: middle;
 }
 
