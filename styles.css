@@ -1800,3 +1800,105 @@ footer {
         padding: 12px 8px 10px 8px;
     }
 }
+
+/* ====== Cards de About (O que é Pace, Por que é importante, Como calcular) ====== */
+.info-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(250,107,13,0.07);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 18px 0 0 0;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.06);
+}
+.info-icon {
+    color: #fa6b0d;
+    font-size: 1.5rem;
+    margin-top: 2px;
+}
+.info-content p {
+    color: var(--text-light);
+    margin: 0;
+}
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin: 22px 0 0 0;
+}
+.benefit-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    padding: 18px 14px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+    min-height: 120px;
+    position: relative;
+}
+.benefit-card:hover {
+    box-shadow: 0 8px 24px rgba(250,107,13,0.13);
+    border-color: #fa6b0d55;
+    transform: translateY(-4px) scale(1.03);
+}
+.benefit-icon {
+    font-size: 1.5rem;
+    color: #fa6b0d;
+    background: rgba(250,107,13,0.10);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.08);
+    margin-bottom: 8px;
+}
+.benefit-card h3 {
+    font-size: 1.08rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0 0 6px 0;
+}
+.benefit-card p {
+    color: var(--text-light);
+    font-size: 0.97rem;
+    margin: 0;
+}
+.formula-box, .example-box {
+    background: rgba(250,107,13,0.07);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 14px 0 0 0;
+    box-shadow: 0 2px 8px rgba(250,107,13,0.06);
+    color: #fa6b0d;
+    font-weight: 600;
+    font-size: 1.08rem;
+}
+.formula-box-secondary {
+    background: rgba(250,107,13,0.13);
+    color: #fff;
+    font-weight: 700;
+    margin: 10px 0;
+}
+.example-box p {
+    color: var(--text-light);
+    font-weight: 500;
+    margin: 0 0 6px 0;
+}
+@media (max-width: 700px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .benefit-card {
+        padding: 12px 8px 10px 8px;
+    }
+    .info-block, .formula-box, .example-box {
+        padding: 10px 6px;
+    }
+}
